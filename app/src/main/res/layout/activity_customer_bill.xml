@@ -1,0 +1,135 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="com.actv.simpfo.myapplication.CustomerBillActivity" android:layout_margin="10dp"  android:gravity="center_horizontal">
+
+    <TextView android:text="@string/customer_bill" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" android:orientation="vertical"
+        android:background="@android:color/darker_gray">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="horizontal">
+
+            <TextView android:text="@string/customer_number" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <TextView android:text="@string/colon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+            <TextView android:id="@+id/custNumber_text_view" android:text="@string/customer_number" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <TextView android:text="@string/customer_name" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView android:text="@string/colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+        <TextView android:id="@+id/custName_text_view" android:text="@string/customer_name" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <TextView android:text="@string/customer_address" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView android:text="@string/colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+        <TextView android:id="@+id/custAddress_text_view" android:text="@string/customer_address" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <TextView android:text="@string/last_payment" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView android:text="@string/colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+        <TextView android:id="@+id/lastPayment_text_view" android:text="@string/last_payment" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <TextView android:text="@string/last_payment_date" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView android:text="@string/colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+        <TextView android:id="@+id/lastPaymentDate_text_view" android:text="@string/last_payment_date" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <TextView android:text="@string/total_balance" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView android:text="@string/colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+        <TextView android:id="@+id/totalBalance_text_view" android:text="@string/total_balance" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <TextView android:text="@string/payment_amount" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView android:text="@string/colon"            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+        <EditText android:id="@+id/paymentAmount_edit_text_view" android:text="@string/payment_amount" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:gravity="center_horizontal">
+    <Button android:id="@+id/add_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:text="@string/add" />
+</LinearLayout>
+    </LinearLayout>
+</LinearLayout>
