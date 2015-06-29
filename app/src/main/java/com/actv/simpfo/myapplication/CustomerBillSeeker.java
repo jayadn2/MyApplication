@@ -45,6 +45,8 @@ public class CustomerBillSeeker extends GenericSeeker<CustomerBalanceDetail> {
         return result;
     }
 
+    //Create a Post request
+
     @Override
     public ArrayList<CustomerBalanceDetail> find(String query, int maxResults) {
         return null;
