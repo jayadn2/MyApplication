@@ -1,7 +1,7 @@
 package com.actv.simpfo.myapplication;
 
 import com.actv.simpfo.myapplication.Model.CustomerBalanceDetail;
-import com.actv.simpfo.myapplication.Model.CustomerJson;
+
 import com.google.gson.Gson;
 
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -51,6 +51,11 @@ public class CustomerBalanceSeeker extends GenericSeeker<CustomerBalanceDetail> 
 
     @Override
     public ArrayList<CustomerBalanceDetail> find(String query, int maxResults) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<CustomerBalanceDetail> findPost(String query) {
         return null;
     }
 

@@ -86,4 +86,8 @@ return null;
         return User_Search_Path;
     }
 
+    @Override
+    public ArrayList<User> findPost(String query) {
+        return null;
+    }
 }

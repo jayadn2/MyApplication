@@ -55,6 +55,11 @@ public class CustomerSeeker extends GenericSeeker<CustomerJson> {
     }
 
     @Override
+    public ArrayList<CustomerJson> findPost(String query) {
+        return null;
+    }
+
+    @Override
     public String retrieveSearchMethodPath() {
         return User_Search_Path;
     }
