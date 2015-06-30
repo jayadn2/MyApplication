@@ -15,7 +15,7 @@ public abstract class GenericSeeker<E> {
     protected HttpRetriever httpRetriever = new HttpRetriever();
     public abstract ArrayList<E> find(String query);
     public abstract ArrayList<E> find(String query, int maxResults);
-    public abstract ArrayList<E> findPost(String query);
+    public abstract ArrayList<E> findPost(Object postObject);
     public abstract String retrieveSearchMethodPath();
     public abstract String ValidateUser(String userName, String password);
     private String token = "";

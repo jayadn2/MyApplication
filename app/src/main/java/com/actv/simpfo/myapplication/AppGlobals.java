@@ -2,6 +2,8 @@ package com.actv.simpfo.myapplication;
 
 import android.content.Context;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by JaSh on 06/06/2015.
  */
@@ -9,6 +11,7 @@ public class AppGlobals {
     public static String EmpId = "";
     public static String Token = "";
     public static int SelectedCustomerId = -1;
+    private static SimpleDateFormat curFormater = new SimpleDateFormat("dd/MM/yyyy");
 
     private static Context context;
 
@@ -19,6 +22,10 @@ public class AppGlobals {
     public static Context getContext()
     {
         return context;
+    }
+
+    public static SimpleDateFormat AppDateFormat() {
+        return curFormater;
     }
 
 }

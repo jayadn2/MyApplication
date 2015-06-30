@@ -48,8 +48,46 @@ public class CustomerBillSeeker extends GenericSeeker<CustomerBalanceDetail> {
     //Create a Post request
 
     @Override
-    public ArrayList<CustomerBalanceDetail> findPost(String query) {
-        return null;
+    public ArrayList<CustomerBalanceDetail> findPost(Object postObject) {
+        CustomerBalanceDetail customerBalanceDetail = (CustomerBalanceDetail) postObject;
+        ArrayList<CustomerBalanceDetail> result = null;
+        String response = "";
+        String url = constructSearchUrl("");
+        PostMethod method = new PostMethod(url);
+        setToken(AppGlobals.Token);
+        //http://www.java2s.com/Code/Java/Apache-Common/HttppostmethodExample.htm
+        //Sample request - http://localhost:802/api/CustomerDetails/20
+        //Header - Authorization: Bearer UnUihp2SZvAKHCyncqDQRWXB1TKk_ALO9AMUpAz7lJV3Igytjhco06ztbr4bQzpGQGqEQf-CJqkB5xU5VX8shSnFcDcjw4cP8SJ-8cByJnJ6sU71-2xRnU0jGA6KXqKKrbONJC4QhAdJDd7IZ37rH45GK2BaYa_hYkjHRIBNLSftZyg3mNu7X6Lz22nRzAsZMaS5QIGO8hv0LEHKJUlnAVgtNa8bl1f2gl7VNB83pi4
+        method.addRequestHeader("Authorization","Bearer " + getToken());
+        method.addRequestHeader("Content-Type", "application/json");
+        method.addParameter("CustId", String.valueOf(customerBalanceDetail.getCustId()));
+        method.addParameter("CustName", customerBalanceDetail.getCustName());
+        method.addParameter("Adress", customerBalanceDetail.getAdress());
+        method.addParameter("LastPaidAmt", String.valueOf(customerBalanceDetail.getLastPaidAmt()));
+        method.addParameter("LastPaidDate", customerBalanceDetail.getLastPaidDate());
+        method.addParameter("TotalBalance", String.valueOf(customerBalanceDetail.getTotalBalance()));
+        method.addParameter("CurrentPayment", String.valueOf(customerBalanceDetail.getCurrentPayment()));
+        method.addParameter("CurrentPaymentDate", customerBalanceDetail.getCurrentPaymentDate());
+        method.addParameter("EmpId", String.valueOf(customerBalanceDetail.getEmpId()));
+        method.addParameter("GpsLocation", customerBalanceDetail.getGpsLocation());
+        method = httpRetriever.PostRequest(method);
+        if(method != null)
+        {
+            response = method.getResponseBodyAsString();
+            Gson gson = new Gson();
+            CustomerBalanceDetail[] customers =  gson.fromJson(response, CustomerBalanceDetail[].class);
+            result = new ArrayList<CustomerBalanceDetail>();
+            if(customers != null)
+            {
+                for (int i = 0; i < customers.length; i++) {
+                    CustomerBalanceDetail customerJson = new CustomerBalanceDetail(customers[i]);
+                    result.add(customerJson);
+                }
+            }
+        }
+        return result;
+
+
     }
 
     @Override

@@ -19,6 +19,8 @@ import com.actv.simpfo.myapplication.Model.CustomerBalanceDetail;
 import com.actv.simpfo.myapplication.Model.CustomerJson;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class CustomerBillActivity extends ActionBarActivity {
@@ -35,12 +37,20 @@ public class CustomerBillActivity extends ActionBarActivity {
     private TextView lastPaymentDateTextView;
     private TextView totalBalanceTextView;
     private EditText paymentAmountEditTextView;
+    private Button addButton;
+    private CustomerBalanceDetail customerBalanceDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_bill);
         FindAllViewsById();
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateBalance();
+            }
+        });
         GetCustomerBalance();
     }
 
@@ -53,7 +63,19 @@ public class CustomerBillActivity extends ActionBarActivity {
         lastPaymentDateTextView = (TextView) findViewById(R.id.lastPaymentDate_text_view);
         totalBalanceTextView = (TextView) findViewById(R.id.totalBalance_text_view);
         paymentAmountEditTextView = (EditText) findViewById(R.id.paymentAmount_edit_text_view);
+        addButton = (Button) findViewById(R.id.add_Button_view);
+    }
 
+    private void UpdateBalance()
+    {
+        if(customerBalanceDetail != null) {
+            int amount = Integer.parseInt(paymentAmountEditTextView.getText().toString());
+            Calendar cal = Calendar.getInstance();
+            String paymentDate = AppGlobals.AppDateFormat().format(cal.getTime());
+            customerBalanceDetail.setCurrentPayment(amount);
+            customerBalanceDetail.setCurrentPaymentDate(paymentDate);
+            //customerBillSeeker.findPost()
+        }
     }
 
     private void GetCustomerBalance()
@@ -121,7 +143,7 @@ public class CustomerBillActivity extends ActionBarActivity {
                         progressDialog = null;
                     }
                     if (result != null && result.size() > 0) {
-                        CustomerBalanceDetail customerBalanceDetail = result.get(0);
+                        customerBalanceDetail = result.get(0);
                         if(customerBalanceDetail != null) {
                             customerBillCustIdTextView.setText(String.valueOf(customerBalanceDetail.getCustId()));
                             custNameTextView.setText(customerBalanceDetail.getCustName());

@@ -55,7 +55,7 @@ public class CustomerBalanceSeeker extends GenericSeeker<CustomerBalanceDetail> 
     }
 
     @Override
-    public ArrayList<CustomerBalanceDetail> findPost(String query) {
+    public ArrayList<CustomerBalanceDetail> findPost(Object query) {
         return null;
     }
 

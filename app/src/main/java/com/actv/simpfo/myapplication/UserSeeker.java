@@ -87,7 +87,7 @@ return null;
     }
 
     @Override
-    public ArrayList<User> findPost(String query) {
+    public ArrayList<User> findPost(Object query) {
         return null;
     }
 }

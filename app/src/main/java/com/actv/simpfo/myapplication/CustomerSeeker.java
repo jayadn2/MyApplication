@@ -55,7 +55,7 @@ public class CustomerSeeker extends GenericSeeker<CustomerJson> {
     }
 
     @Override
-    public ArrayList<CustomerJson> findPost(String query) {
+    public ArrayList<CustomerJson> findPost(Object query) {
         return null;
     }
 
