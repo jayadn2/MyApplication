@@ -5,15 +5,15 @@ import java.util.Date;
  * Created by JaSh on 11/06/2015.
  */
 public class CustomerBalanceDetail {
-    private int CustId;
+    private String CustId;
     private String CustName;
     private String Adress;
-    private int LastPaidAmt;
+    private String LastPaidAmt;
     private String LastPaidDate;
-    private int TotalBalance;
-    private int CurrentPayment;
+    private String TotalBalance;
+    private String CurrentPayment;
     private String CurrentPaymentDate;
-    private int EmpId;
+    private String EmpId;
     private String GpsLocation;
 
     public CustomerBalanceDetail() {
@@ -32,11 +32,11 @@ public class CustomerBalanceDetail {
         GpsLocation = _customerBalanceDetail.getGpsLocation();
     }
 
-    public int getCustId() {
+    public String getCustId() {
         return CustId;
     }
 
-    public void setCustId(int custId) {
+    public void setCustId(String custId) {
         CustId = custId;
     }
 
@@ -56,11 +56,11 @@ public class CustomerBalanceDetail {
         Adress = adress;
     }
 
-    public int getLastPaidAmt() {
+    public String getLastPaidAmt() {
         return LastPaidAmt;
     }
 
-    public void setLastPaidAmt(int lastPaidAmt) {
+    public void setLastPaidAmt(String lastPaidAmt) {
         LastPaidAmt = lastPaidAmt;
     }
 
@@ -72,19 +72,19 @@ public class CustomerBalanceDetail {
         LastPaidDate = lastPaidDate;
     }
 
-    public int getTotalBalance() {
+    public String getTotalBalance() {
         return TotalBalance;
     }
 
-    public void setTotalBalance(int totalBalance) {
+    public void setTotalBalance(String totalBalance) {
         TotalBalance = totalBalance;
     }
 
-    public int getCurrentPayment() {
+    public String getCurrentPayment() {
         return CurrentPayment;
     }
 
-    public void setCurrentPayment(int currentPayment) {
+    public void setCurrentPayment(String currentPayment) {
         CurrentPayment = currentPayment;
     }
 
@@ -96,11 +96,11 @@ public class CustomerBalanceDetail {
         CurrentPaymentDate = currentPaymentDate;
     }
 
-    public int getEmpId() {
+    public String getEmpId() {
         return EmpId;
     }
 
-    public void setEmpId(int empId) {
+    public void setEmpId(String empId) {
         EmpId = empId;
     }
 

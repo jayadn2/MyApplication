@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.actv.simpfo.myapplication.Model.CustomerBalanceDetail;
 import com.actv.simpfo.myapplication.Model.CustomerJson;
+import com.actv.simpfo.myapplication.CollectionEntry;
+import com.actv.simpfo.myapplication.Model.MobileCollectionJson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,6 +41,9 @@ public class CustomerBillActivity extends ActionBarActivity {
     private EditText paymentAmountEditTextView;
     private Button addButton;
     private CustomerBalanceDetail customerBalanceDetail;
+    private String enteredAmount;
+    private GenericSeeker<MobileCollectionJson> collectionSeeker = new CollectionEntry();
+    private MobileCollectionJson collectionEntry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +73,13 @@ public class CustomerBillActivity extends ActionBarActivity {
 
     private void UpdateBalance()
     {
-        if(customerBalanceDetail != null) {
-            int amount = Integer.parseInt(paymentAmountEditTextView.getText().toString());
-            Calendar cal = Calendar.getInstance();
-            String paymentDate = AppGlobals.AppDateFormat().format(cal.getTime());
-            customerBalanceDetail.setCurrentPayment(amount);
-            customerBalanceDetail.setCurrentPaymentDate(paymentDate);
-            //customerBillSeeker.findPost()
-        }
+        enteredAmount = paymentAmountEditTextView.getText().toString();
+        customerBalanceDetail.setEmpId(AppGlobals.EmpId);
+        progressDialog = ProgressDialog.show(CustomerBillActivity.this,
+                "Please wait...", "Updating entry for "+ custNameTextView.getText().toString() +" ...", true, true);
+        PerformPostCustomerBalanceTask task = new PerformPostCustomerBalanceTask();
+        task.execute(String.valueOf(custId));
+        progressDialog.setOnCancelListener(new CancelTaskOnCancelListener(task));
     }
 
     private void GetCustomerBalance()
@@ -152,6 +156,49 @@ public class CustomerBillActivity extends ActionBarActivity {
                             lastPaymentDateTextView.setText(customerBalanceDetail.getLastPaidDate());
                             totalBalanceTextView.setText(String.valueOf(customerBalanceDetail.getTotalBalance()));
                             paymentAmountEditTextView.setText("");
+                        }
+
+
+                    }
+                    else
+                    {
+                        Toast.makeText(getBaseContext(), "Error while loading customer balance.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+
+
+
+
+    }
+
+    private class PerformPostCustomerBalanceTask extends AsyncTask<String, Void, ArrayList<MobileCollectionJson>> {
+
+        @Override
+        protected  ArrayList<MobileCollectionJson> doInBackground(String... params) {
+            if(customerBalanceDetail != null) {
+                collectionSeeker.setToken(token);
+                Calendar cal = Calendar.getInstance();
+                String paymentDate = AppGlobals.AppDateFormat().format(cal.getTime());
+                customerBalanceDetail.setCurrentPayment(enteredAmount);
+                customerBalanceDetail.setCurrentPaymentDate(paymentDate);
+            }
+            return collectionSeeker.findPost(customerBalanceDetail);
+        }
+
+        @Override
+        protected void onPostExecute(final ArrayList<MobileCollectionJson> result) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (progressDialog!=null) {
+                        progressDialog.dismiss();
+                        progressDialog = null;
+                    }
+                    if (result != null && result.size() > 0) {
+                        collectionEntry = result.get(0);
+                        if(collectionEntry != null) {
                         }
 
 
