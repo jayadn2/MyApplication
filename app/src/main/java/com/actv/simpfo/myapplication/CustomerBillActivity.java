@@ -1,5 +1,6 @@
 package com.actv.simpfo.myapplication;
 
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -199,6 +200,8 @@ public class CustomerBillActivity extends ActionBarActivity {
                     if (result != null && result.size() > 0) {
                         collectionEntry = result.get(0);
                         if(collectionEntry != null) {
+                            //Display the dialog box to print the receipt.
+                            ShowPrintDialog();
                         }
 
 
@@ -209,6 +212,15 @@ public class CustomerBillActivity extends ActionBarActivity {
                     }
                 }
             });
+        }
+
+
+        private void ShowPrintDialog()
+        {
+            //Display the dialog here.
+            DialogFragment newFragment = new CustomerBillPrintDialogFragment();
+            newFragment.show(getFragmentManager(), "CustomerBillPrintDialog");
+
         }
 
 

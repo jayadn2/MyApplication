@@ -1,0 +1,16 @@
+Send data from on activity to another activity
+----------------------------------------------
+
+// I assume Page.class is your second ativity
+Intent intent = new Intent(this, Page.class);
+intent.putExtra("arg", getText()); // getText() SHOULD NOT be static!!!
+startActivity(intent);
+
+Then in second activity you retrive argument like this:
+
+String passedArg = getIntent().getExtras().getString("arg");
+enteredValue.setText(passedArg);
+
+It's also good to store "arg" String in MainActivity as constant and always refer to it in other places.
+
+public static final String ARG_FROM_MAIN = "arg";
