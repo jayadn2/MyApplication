@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -58,6 +59,10 @@ public class CustomerBillActivity extends ActionBarActivity {
             }
         });
         GetCustomerBalance();
+        InputMethodManager inputMethodManager=(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null){
+            inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+        }
     }
 
 
@@ -219,6 +224,7 @@ public class CustomerBillActivity extends ActionBarActivity {
         {
             //Display the dialog here.
             DialogFragment newFragment = new CustomerBillPrintDialogFragment();
+            newFragment.setCancelable(false);
             newFragment.show(getFragmentManager(), "CustomerBillPrintDialog");
 
         }

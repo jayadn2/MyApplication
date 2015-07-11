@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
 
         <EditText android:id="@+id/paymentAmount_edit_text_view" android:text="@string/payment_amount" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" android:hint="Amount" android:imeOptions="actionDone" android:inputType="number" />
 
     </LinearLayout>
 <LinearLayout
