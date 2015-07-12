@@ -52,6 +52,9 @@ public class CustomerBillActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_bill);
         FindAllViewsById();
+        //Clear the previously set value.
+        AppGlobals.SelectedCollectionEntry = null;
+        AppGlobals.SelectedCustomerBalanceDetail = null;
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,6 +158,7 @@ public class CustomerBillActivity extends ActionBarActivity {
                     if (result != null && result.size() > 0) {
                         customerBalanceDetail = result.get(0);
                         if(customerBalanceDetail != null) {
+                            AppGlobals.SelectedCustomerBalanceDetail = customerBalanceDetail;
                             customerBillCustIdTextView.setText(String.valueOf(customerBalanceDetail.getCustId()));
                             custNameTextView.setText(customerBalanceDetail.getCustName());
                             custAddressTextView.setText(customerBalanceDetail.getAdress());
@@ -206,6 +210,7 @@ public class CustomerBillActivity extends ActionBarActivity {
                         collectionEntry = result.get(0);
                         if(collectionEntry != null) {
                             //Display the dialog box to print the receipt.
+                            AppGlobals.SelectedCollectionEntry = collectionEntry;
                             ShowPrintDialog();
                         }
 

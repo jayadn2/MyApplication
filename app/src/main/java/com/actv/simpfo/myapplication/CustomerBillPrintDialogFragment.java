@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.actv.simpfo.myapplication.Model.MobileCollectionJson;
 import com.actv.simpfo.myapplication.R;
 
 /**
@@ -17,6 +18,10 @@ import com.actv.simpfo.myapplication.R;
 public class CustomerBillPrintDialogFragment extends DialogFragment {
     private TextView customerCustIdTextView;
     private TextView customerCustNameTextView;
+    private TextView receiptNumberTextView;
+    private TextView amountTextView;
+    private TextView billDateTextView;
+    private   MobileCollectionJson selectedCollectionEntry;
     View view;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -42,10 +47,28 @@ public class CustomerBillPrintDialogFragment extends DialogFragment {
     private void FindAllViewsById() {
         customerCustIdTextView =(TextView) view.findViewById(R.id.custid_bill_print_text_view);
         customerCustNameTextView = (TextView) view.findViewById(R.id.name_bill_print_text_view);
-        if(customerCustIdTextView != null)
-            customerCustIdTextView.setText("Hi");
-        if(customerCustNameTextView != null)
-            customerCustNameTextView.setText("Hello");
+        receiptNumberTextView = (TextView) view.findViewById(R.id.receipt_number_bill_print_text_view);
+        amountTextView = (TextView) view.findViewById(R.id.receipt_amount_bill_print_text_view);
+        billDateTextView = (TextView) view.findViewById(R.id.receipt_date_bill_print_text_view);
+
+        selectedCollectionEntry = AppGlobals.SelectedCollectionEntry;
+        if(selectedCollectionEntry != null) {
+            if (customerCustIdTextView != null)
+                customerCustIdTextView.setText(selectedCollectionEntry.CustomerId);
+
+            if (customerCustNameTextView != null)
+                customerCustNameTextView.setText(AppGlobals.SelectedCustomerBalanceDetail.getCustName());
+
+            if(receiptNumberTextView != null)
+                receiptNumberTextView.setText(selectedCollectionEntry.RecieptNo);
+
+            if(amountTextView != null)
+                amountTextView.setText(selectedCollectionEntry.Amount);
+
+            if(billDateTextView != null)
+                billDateTextView.setText(selectedCollectionEntry.CollectionDate);
+
+        }
     }
 
 

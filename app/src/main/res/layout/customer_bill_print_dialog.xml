@@ -2,27 +2,98 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
     >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:orientation="horizontal" android:layout_gravity="center_horizontal" android:layout_marginTop="20px" android:layout_marginBottom="20px">
+
+        <TextView android:text="@string/company_name" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            style="@style/Base.TextAppearance.AppCompat.Large" />
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/custid_bill_print_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:text="id"
-        android:layout_marginEnd="10dp"
-        />
+        <TextView android:text="@string/customer_number" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-        <TextView
-            android:id="@+id/name_bill_print_text_view"
+        <TextView android:text="@string/colon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
 
-            android:text="name"
-            />
-        </LinearLayout>
+        <TextView android:id="@+id/custid_bill_print_text_view" android:text="@string/customer_number" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <TextView android:text="@string/customer_name" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView android:text="@string/colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+        <TextView android:id="@+id/name_bill_print_text_view" android:text="@string/customer_name" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <TextView android:text="@string/receipt_number" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView android:text="@string/colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+        <TextView android:id="@+id/receipt_number_bill_print_text_view" android:text="@string/receipt_number" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <TextView android:text="@string/amount" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView android:text="@string/colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+        <TextView android:id="@+id/receipt_amount_bill_print_text_view" android:text="@string/amount" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <TextView android:text="@string/bill_date" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView android:text="@string/colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+
+        <TextView android:id="@+id/receipt_date_bill_print_text_view" android:text="@string/bill_date" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
 </LinearLayout>

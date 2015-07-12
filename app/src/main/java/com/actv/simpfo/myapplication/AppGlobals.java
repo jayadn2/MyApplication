@@ -2,6 +2,9 @@ package com.actv.simpfo.myapplication;
 
 import android.content.Context;
 
+import com.actv.simpfo.myapplication.Model.CustomerBalanceDetail;
+import com.actv.simpfo.myapplication.Model.MobileCollectionJson;
+
 import java.text.SimpleDateFormat;
 
 /**
@@ -27,5 +30,9 @@ public class AppGlobals {
     public static SimpleDateFormat AppDateFormat() {
         return curFormater;
     }
+
+    public static MobileCollectionJson SelectedCollectionEntry;
+
+    public static CustomerBalanceDetail SelectedCustomerBalanceDetail;
 
 }
