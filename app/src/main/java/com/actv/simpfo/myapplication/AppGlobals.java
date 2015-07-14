@@ -1,5 +1,6 @@
 package com.actv.simpfo.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.actv.simpfo.myapplication.Model.CustomerBalanceDetail;
@@ -34,5 +35,7 @@ public class AppGlobals {
     public static MobileCollectionJson SelectedCollectionEntry;
 
     public static CustomerBalanceDetail SelectedCustomerBalanceDetail;
+
+    public static Activity MainActivity;
 
 }

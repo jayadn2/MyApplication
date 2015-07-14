@@ -35,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         this.FindAllViewsById();
         AppGlobals.setContext(getBaseContext());
+        AppGlobals.MainActivity = this;
         loginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +139,11 @@ public class MainActivity extends ActionBarActivity {
                         AppGlobals.EmpId = empId;
                         Intent i = new Intent(getApplicationContext(),CustomerListActivity.class);
                         startActivity(i);
+                        boolean connected = PrintHelper.ConnectToPrinter();
+                        if(connected)
+                            Toast.makeText(getBaseContext(), "Connected to Printer", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getBaseContext(), "Error connecting to Printer", Toast.LENGTH_LONG).show();
                     }
                     else
                     {
