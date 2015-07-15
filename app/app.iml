@@ -92,6 +92,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="commons-httpclient-2.0" level="project" />
+    <orderEntry type="library" exported="" name="ngx-bluetooth-printer-sdk-v0.9.8" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
   </component>

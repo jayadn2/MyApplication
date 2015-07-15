@@ -16,7 +16,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.content.DialogInterface.OnCancelListener;
 
+
 import com.actv.simpfo.myapplication.Model.User;
+import com.ngx.BluetoothPrinter;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -29,6 +31,8 @@ public class MainActivity extends ActionBarActivity {
     private ProgressDialog progressDialog;
     private String empId = "";
     private String token ="";
+    public static BluetoothPrinter mBtp = BluetoothPrinter.INSTANCE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
