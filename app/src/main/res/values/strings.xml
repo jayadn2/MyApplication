@@ -25,4 +25,7 @@
     <string name="amount">Amount</string>
     <string name="bill_date">Bill Date</string>
     <string name="company_name">Siti Channel</string>
+    <string name="print_test">Print Test</string>
+    <string name="action_connect_device">Connect Device</string>
+    <string name="action_unpair_device">Unpair Device</string>
 </resources>

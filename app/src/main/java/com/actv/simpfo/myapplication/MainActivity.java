@@ -1,13 +1,18 @@
 package com.actv.simpfo.myapplication;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -19,6 +24,8 @@ import android.content.DialogInterface.OnCancelListener;
 
 import com.actv.simpfo.myapplication.Model.User;
 import com.ngx.BluetoothPrinter;
+import com.ngx.DebugLog;
+import android.app.AlertDialog.Builder;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -32,6 +39,12 @@ public class MainActivity extends ActionBarActivity {
     private String empId = "";
     private String token ="";
     public static BluetoothPrinter mBtp = BluetoothPrinter.INSTANCE;
+    private String mConnectedDeviceName = "";
+    public static final String title_connecting = "connecting...";
+    public static final String title_connected_to = "connected: ";
+    public static final String title_not_connected = "not connected";
+    public String bluetoothStatus = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +66,46 @@ public class MainActivity extends ActionBarActivity {
                 performSearch(query);
             }
         });
+        mBtp.setDebugService(true);
+        try {
+            mBtp.initService(this, mHandler);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    @SuppressLint("HandlerLeak")
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case BluetoothPrinter.MESSAGE_STATE_CHANGE:
+                    switch (msg.arg1) {
+                        case BluetoothPrinter.STATE_CONNECTED:
+                            bluetoothStatus = title_connected_to + " : "+ mConnectedDeviceName;
+                            break;
+                        case BluetoothPrinter.STATE_CONNECTING:
+                            bluetoothStatus = title_connecting;
+                            break;
+                        case BluetoothPrinter.STATE_LISTEN:
+                        case BluetoothPrinter.STATE_NONE:
+                            bluetoothStatus = title_not_connected;
+                            break;
+                    }
+                    break;
+                case BluetoothPrinter.MESSAGE_DEVICE_NAME:
+                    // save the connected device's name
+                    mConnectedDeviceName = msg.getData().getString(
+                            BluetoothPrinter.DEVICE_NAME);
+                    break;
+                case BluetoothPrinter.MESSAGE_STATUS:
+                    bluetoothStatus = msg.getData().getString(BluetoothPrinter.STATUS_TEXT);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
 
     private void performSearch(String query) {
@@ -106,6 +158,73 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.print_test:
+                mBtp.printLogo();
+                return true;
+            case R.id.action_connect_device:
+                // show a dialog to select from the list of available printers
+                //mBtp.showDeviceList(this);
+                mBtp.connectToPrinterUsingMacAddress("98:dD3:31:70:3b:9c");
+                //mBtp.showDeviceList(this);
+
+                return true;
+            case R.id.action_unpair_device:
+                Builder u = new AlertDialog.Builder(this);
+                u.setTitle("Bluetooth Printer unpair");
+                // d.setIcon(R.drawable.ic_launcher);
+                u.setMessage("Are you sure you want to unpair all Bluetooth printers ?");
+                u.setPositiveButton(android.R.string.yes,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (mBtp.unPairBluetoothPrinters()) {
+                                    Toast.makeText(
+                                            getApplicationContext(),
+                                            "All NGX Bluetooth printer(s) unpaired",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                u.setNegativeButton(android.R.string.no,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        });
+                u.show();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPause() {
+        mBtp.onActivityPause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        mBtp.onActivityResume();
+        DebugLog.logTrace("onResume");
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        mBtp.onActivityDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mBtp.onActivityResult(requestCode, resultCode, data, this);
+    }
 
 
     private class PerformLoginTask extends AsyncTask<String, Void, String> {
@@ -143,11 +262,7 @@ public class MainActivity extends ActionBarActivity {
                         AppGlobals.EmpId = empId;
                         Intent i = new Intent(getApplicationContext(),CustomerListActivity.class);
                         startActivity(i);
-                        boolean connected = PrintHelper.ConnectToPrinter();
-                        if(connected)
-                            Toast.makeText(getBaseContext(), "Connected to Printer", Toast.LENGTH_LONG).show();
-                        else
-                            Toast.makeText(getBaseContext(), "Error connecting to Printer", Toast.LENGTH_LONG).show();
+
                     }
                     else
                     {
