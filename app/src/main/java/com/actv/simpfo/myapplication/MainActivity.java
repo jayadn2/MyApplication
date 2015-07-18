@@ -163,14 +163,16 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.print_test:
-                mBtp.printLogo();
+                //mBtp.printLogo();
+                PrintHelper.TestPrint("Siti");
+                PrintHelper.TestPrint("Name", "Jayachandra");
                 return true;
             case R.id.action_connect_device:
                 // show a dialog to select from the list of available printers
                 //mBtp.showDeviceList(this);
-                mBtp.connectToPrinterUsingMacAddress("98:dD3:31:70:3b:9c");
+                //mBtp.connectToPrinterUsingMacAddress("98:D3:31:70:3B:9C");
                 //mBtp.showDeviceList(this);
-
+                PrintHelper.ConnectToPrinter();
                 return true;
             case R.id.action_unpair_device:
                 Builder u = new AlertDialog.Builder(this);

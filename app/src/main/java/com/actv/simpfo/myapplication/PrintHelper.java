@@ -22,7 +22,6 @@ public class PrintHelper {
     public static String Header;
     public List<PrintLine> PrintLines  = new ArrayList<PrintLine>();
     private static boolean isConnected = false;
-    public static String PrinterName = "BTP-B00955";
 
     // android built in classes for bluetooth operations
     private static BluetoothAdapter mBluetoothAdapter;
@@ -39,6 +38,8 @@ public class PrintHelper {
     private static volatile boolean stopWorker;
     private static String statusMessage;
 
+    private static int maxCharInALine = 40;
+
     public PrintHelper()    {    }
 
     public void Print()
@@ -47,7 +48,7 @@ public class PrintHelper {
         {
             //Print to the printer
             try {
-                sendData();
+                sendData(Header);
             } catch (IOException ex) {
             }
         }
@@ -100,7 +101,7 @@ public class PrintHelper {
                 for (BluetoothDevice device : pairedDevices) {
 
                     // PrinterName is the name of the bluetooth printer device
-                    if (device.getName().equals(PrinterName)) {
+                    if (device.getName().equals(AppGlobals.PrinterName)) {
                         mmDevice = device;
                         break;
                     }
@@ -202,11 +203,10 @@ public class PrintHelper {
     /*
      * This will send data to be printed by the bluetooth printer
      */
-    private static void sendData() throws IOException {
+    private static void sendData(String msg) throws IOException {
         try {
-
+            ConnectToPrinter();
             // the text typed by the user
-            String msg = Header;
             msg += "\n";
 
             mmOutputStream.write(msg.getBytes());
@@ -234,6 +234,53 @@ public class PrintHelper {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private static String AdjustToCentre(String stringToBeAdjusted)
+    {
+        int strLength = stringToBeAdjusted.length();
+        if(strLength < maxCharInALine) {
+            int noOfSpaceToPrint = (maxCharInALine / 2) - (strLength / 2);
+            for(int i = 0; i < noOfSpaceToPrint ; i++)
+            {
+                stringToBeAdjusted = " " + stringToBeAdjusted;
+            }
+        }
+        return stringToBeAdjusted;
+    }
+
+    private static String CombineColumnNameAndValue(String columenName, String valueString)
+    {
+        String resultString = "";
+        int noOfDotsToPrint = maxCharInALine - (columenName.length() + valueString.length());
+        int dotPrintStartPos = columenName.length() + 1;
+        resultString = columenName + " ";
+        for(int i = 0; i < noOfDotsToPrint - 2 ; i++)
+        {
+            resultString = resultString + ".";
+        }
+        resultString = resultString + " " + valueString;
+        return resultString;
+    }
+
+    public static void TestPrint(String testString)
+    {
+        //Print to the printer
+        try {
+            testString = AdjustToCentre(testString);
+            sendData(testString);
+        } catch (IOException ex) {
+        }
+    }
+
+    public static void TestPrint(String columnName, String valueString)
+    {
+        //Print to the printer
+        try {
+            String testString = CombineColumnNameAndValue(columnName, valueString);
+            sendData(testString);
+        } catch (IOException ex) {
         }
     }
 
