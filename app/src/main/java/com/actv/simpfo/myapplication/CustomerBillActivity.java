@@ -42,6 +42,7 @@ public class CustomerBillActivity extends ActionBarActivity {
     private TextView totalBalanceTextView;
     private EditText paymentAmountEditTextView;
     private Button addButton;
+    private Button printButton;
     private CustomerBalanceDetail customerBalanceDetail;
     private String enteredAmount;
     private GenericSeeker<MobileCollectionJson> collectionSeeker = new CollectionEntry();
@@ -52,6 +53,7 @@ public class CustomerBillActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_bill);
         FindAllViewsById();
+        paymentAmountEditTextView.setEnabled(true);
         //Clear the previously set value.
         AppGlobals.SelectedCollectionEntry = null;
         AppGlobals.SelectedCustomerBalanceDetail = null;
@@ -66,6 +68,13 @@ public class CustomerBillActivity extends ActionBarActivity {
         if (inputMethodManager != null){
             inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
         }
+
+        printButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowPrintDialog();
+            }
+        });
     }
 
 
@@ -78,6 +87,16 @@ public class CustomerBillActivity extends ActionBarActivity {
         totalBalanceTextView = (TextView) findViewById(R.id.totalBalance_text_view);
         paymentAmountEditTextView = (EditText) findViewById(R.id.paymentAmount_edit_text_view);
         addButton = (Button) findViewById(R.id.add_Button_view);
+        printButton = (Button) findViewById(R.id.print_Button_view);
+    }
+
+    private void ShowPrintDialog()
+    {
+        //Display the dialog here.
+        DialogFragment newFragment = new CustomerBillPrintDialogFragment();
+        newFragment.setCancelable(false);
+        newFragment.show(getFragmentManager(), "CustomerBillPrintDialog");
+
     }
 
     private void UpdateBalance()
@@ -202,22 +221,22 @@ public class CustomerBillActivity extends ActionBarActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (progressDialog!=null) {
+                    if (progressDialog != null) {
                         progressDialog.dismiss();
                         progressDialog = null;
                     }
                     if (result != null && result.size() > 0) {
                         collectionEntry = result.get(0);
-                        if(collectionEntry != null) {
+                        if (collectionEntry != null) {
                             //Display the dialog box to print the receipt.
                             AppGlobals.SelectedCollectionEntry = collectionEntry;
                             ShowPrintDialog();
+                            printButton.setVisibility(View.VISIBLE);
+                            paymentAmountEditTextView.setEnabled(false);
                         }
 
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(getBaseContext(), "Error while loading customer balance.", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -225,14 +244,7 @@ public class CustomerBillActivity extends ActionBarActivity {
         }
 
 
-        private void ShowPrintDialog()
-        {
-            //Display the dialog here.
-            DialogFragment newFragment = new CustomerBillPrintDialogFragment();
-            newFragment.setCancelable(false);
-            newFragment.show(getFragmentManager(), "CustomerBillPrintDialog");
 
-        }
 
 
 

@@ -27,6 +27,8 @@ import com.ngx.BluetoothPrinter;
 import com.ngx.DebugLog;
 import android.app.AlertDialog.Builder;
 
+import java.net.InetAddress;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -57,11 +59,11 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //Alt+240 : ≡
-                if(userNameEditText.getText().length() == 0 || passwordEditText.getText().length() == 0)
-                {
-                    Toast.makeText(getBaseContext(), "Please enter correct username or password", Toast.LENGTH_SHORT).show();
+                if (userNameEditText.getText().length() == 0 || passwordEditText.getText().length() == 0) {
+                    Toast.makeText(getBaseContext(), "Please enter correct username or password", Toast.LENGTH_LONG).show();
                     return;
                 }
+
                 String query = userNameEditText.getText() + "≡" + passwordEditText.getText();//searchEditText.getText().toString();
                 performSearch(query);
             }
@@ -72,6 +74,22 @@ public class MainActivity extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
+
+            if (ipAddr.equals("")) {
+                return false;
+            } else {
+                return true;
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 
     @SuppressLint("HandlerLeak")
@@ -233,18 +251,25 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String query = params[0];
-            String[] arr = query.split("≡");
-            if(arr.length == 2) {
-                String userName = arr[0];
-                String password = arr[1];
-                String empId = userSeeker.ValidateUser(userName, password);
-                setEmpId(empId);
-                AppGlobals.EmpId = empId;
-                return getEmpId();
+            if(isInternetAvailable()) {
+                String query = params[0];
+                String[] arr = query.split("≡");
+                if(arr.length == 2) {
+                    String userName = arr[0];
+                    String password = arr[1];
+                    String empId = userSeeker.ValidateUser(userName, password);
+                    setEmpId(empId);
+                    AppGlobals.EmpId = empId;
+                    return getEmpId();
+                }
+                else
+                    return "";
             }
             else
-                return "";
+            {
+                return "NoInternet";
+            }
+
         }
 
         @Override
@@ -256,7 +281,11 @@ public class MainActivity extends ActionBarActivity {
                         progressDialog.dismiss();
                         progressDialog = null;
                     }
-                    if (result != "") {
+                    if(result == "NoInternet")
+                    {
+                        Toast.makeText(getBaseContext(), "No Internet connection. Connect to Internet and try again.", Toast.LENGTH_LONG).show();
+                    }
+                    else if (result != "") {
                         //Store the returned empid for future use.
                         //setEmpId(result);
                         String empId = result;
