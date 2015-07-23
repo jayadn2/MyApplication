@@ -20,7 +20,7 @@ import android.os.Handler;
 public class PrintHelper {
 
     public static String Header;
-    public List<PrintLine> PrintLines  = new ArrayList<PrintLine>();
+    public static List<PrintLine> PrintLines  = new ArrayList<PrintLine>();
     private static boolean isConnected = false;
 
     // android built in classes for bluetooth operations
@@ -39,16 +39,34 @@ public class PrintHelper {
     private static String statusMessage;
 
     private static int maxCharInALine = 40;
+    private static String dividerLine = "----------------------------------------";
+    private static String lineFeed = "                                        ";
 
     public PrintHelper()    {    }
 
-    public void Print()
+    public static void Print()
     {
+        if(!isConnected)
+        ConnectToPrinter();
         if(isConnected)
         {
             //Print to the printer
             try {
+                Header = AdjustToCentre(AppGlobals.CompanyName);
                 sendData(Header);
+                sendData(dividerLine);
+                if(PrintLines != null && PrintLines.size() > 0)
+                {
+                    for (int i = 0; i < PrintLines.size() ; i++)
+                    {
+                        String printLine = CombineColumnNameAndValue(PrintLines.get(i).Header, PrintLines.get(i).Value);
+                        sendData(printLine);
+                    }
+                }
+                sendData(lineFeed);
+                sendData(lineFeed);
+                sendData(lineFeed);
+
             } catch (IOException ex) {
             }
         }
@@ -205,7 +223,6 @@ public class PrintHelper {
      */
     private static void sendData(String msg) throws IOException {
         try {
-            ConnectToPrinter();
             // the text typed by the user
             msg += "\n";
 

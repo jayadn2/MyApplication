@@ -22,7 +22,8 @@ public class CustomerBillPrintDialogFragment extends DialogFragment {
     private TextView amountTextView;
     private TextView billDateTextView;
     private   MobileCollectionJson selectedCollectionEntry;
-    View view;
+    private View view;
+    PrintLine printLine;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -38,6 +39,32 @@ public class CustomerBillPrintDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // Print the bill here ...
+                        PrintHelper.PrintLines.clear();
+                        printLine = new PrintLine();
+                        printLine.Header = "Customer ID";
+                        printLine.Value = customerCustIdTextView.getText().toString();
+                        PrintHelper.PrintLines.add(printLine);
+
+                        printLine = new PrintLine();
+                        printLine.Header = "Customer Name";
+                        printLine.Value = customerCustNameTextView.getText().toString();
+                        PrintHelper.PrintLines.add(printLine);
+
+                        printLine = new PrintLine();
+                        printLine.Header = "Receipt No.";
+                        printLine.Value = receiptNumberTextView.getText().toString();
+                        PrintHelper.PrintLines.add(printLine);
+
+                        printLine = new PrintLine();
+                        printLine.Header = "Amount";
+                        printLine.Value = amountTextView.getText().toString();
+                        PrintHelper.PrintLines.add(printLine);
+
+                        printLine = new PrintLine();
+                        printLine.Header = "Date";
+                        printLine.Value = billDateTextView.getText().toString();
+                        PrintHelper.PrintLines.add(printLine);
+                        PrintHelper.Print();
                     }
                 });
         FindAllViewsById();

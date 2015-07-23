@@ -40,4 +40,6 @@ public class AppGlobals {
 
     public static String PrinterName = "BTP-B00955";
 
+    public static String CompanyName = "SITI";
+
 }
