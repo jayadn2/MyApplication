@@ -28,4 +28,8 @@
     <string name="print_test">Print Test</string>
     <string name="action_connect_device">Connect Device</string>
     <string name="action_unpair_device">Unpair Device</string>
+    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="collection_report">Collection Report</string>
+    <string name="customer_list">Customer List</string>
+    <string name="title_activity_collection_report">CollectionReportActivity</string>
 </resources>

@@ -291,7 +291,7 @@ public class MainActivity extends ActionBarActivity {
                         String empId = result;
                         setEmpId(empId);
                         AppGlobals.EmpId = empId;
-                        Intent i = new Intent(getApplicationContext(),CustomerListActivity.class);
+                        Intent i = new Intent(getApplicationContext(),MainMenu.class);
                         startActivity(i);
 
                     }
