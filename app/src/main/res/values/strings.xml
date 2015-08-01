@@ -32,4 +32,10 @@
     <string name="collection_report">Collection Report</string>
     <string name="customer_list">Customer List</string>
     <string name="title_activity_collection_report">CollectionReportActivity</string>
+    <string name="from_date">From Date</string>
+    <string name="bill_num_from">Bill Num From</string>
+    <string name="bill_num_to">Bill Num To</string>
+    <string name="to_date">To Date</string>
+    <string name="search">Search</string>
+    <string name="submit">Submit</string>
 </resources>
