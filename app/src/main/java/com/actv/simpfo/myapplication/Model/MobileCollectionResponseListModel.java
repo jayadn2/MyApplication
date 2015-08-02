@@ -1,6 +1,6 @@
 package com.actv.simpfo.myapplication.Model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by JaSh on 30/07/2015.
@@ -8,5 +8,5 @@ import java.util.List;
 public class MobileCollectionResponseListModel {
     public int NoOfBills;
     public int TotalAmountCollection;
-    private List<MobileCollectionResponseModel> ReslutCollection = null;
+    public ArrayList<MobileCollectionResponseModel> ReslutCollection = null;
 }
