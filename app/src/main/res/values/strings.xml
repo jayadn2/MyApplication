@@ -38,4 +38,6 @@
     <string name="to_date">To Date</string>
     <string name="search">Search</string>
     <string name="submit">Submit</string>
+    <string name="num_of_bills_found">No. of bills</string>
+    <string name="amount_collected">Amount Collected</string>
 </resources>

@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +39,9 @@ public class CollectionReportActivity extends ListActivity {
     private EditText billNumFromEditText;
     private EditText billNumToEditText;
     private EditText collectionFilterEditText;
-    private ListView resultListView;
+    private EditText numOfBillsEditText;
+    private EditText amountCollectedEditText;
+    //private ListView resultListView;
     private int year, month, day;
     private CheckBox allCustomersCheckBox;
     private CollectionReportAdapter collectionReportAdapter;
@@ -64,7 +68,8 @@ public class CollectionReportActivity extends ListActivity {
         billNumFromEditText = (EditText) findViewById(R.id.billNumFromEditText);
         billNumToEditText = (EditText) findViewById(R.id.billNumToEditText);
         collectionFilterEditText = (EditText) findViewById(R.id.collectionFilterEditText);
-        resultListView = (ListView) findViewById(R.id.resultListView);
+        numOfBillsEditText = (EditText) findViewById(R.id.numOfBillsEditText);
+        amountCollectedEditText = (EditText) findViewById(R.id.amountCollectedEditText);
 
         collectionRequest = new MobileCollectionRequestModel();
 
@@ -74,6 +79,27 @@ public class CollectionReportActivity extends ListActivity {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(fromDateView, year, month + 1, day);
         showDate(toDateView, year, month + 1, day);
+        //Enabling Search Filter
+        collectionFilterEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                CollectionReportAdapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
     }
 
     //@SuppressWarnings("deprecation")
@@ -174,12 +200,16 @@ public class CollectionReportActivity extends ListActivity {
                         //}
                         //customerListAdapter.notifyDataSetChanged();
                         if (result != null && result.size() > 0) {
-                            ArrayList<MobileCollectionResponseModel> collectionResponseModel = result.get(0).ReslutCollection;
+                            MobileCollectionResponseListModel responseListModel = result.get(0);
+                            ArrayList<MobileCollectionResponseModel> collectionResponseModel = responseListModel.ReslutCollection;
 
 
                             collectionReportAdapter = new CollectionReportAdapter(currentActivity, R.layout.collection_report_row, collectionResponseModel);
                             setListAdapter(collectionReportAdapter);
                             collectionReportAdapter.notifyDataSetChanged();
+                            numOfBillsEditText.setText(String.valueOf(responseListModel.NoOfBills));
+                            amountCollectedEditText.setText(String.valueOf(responseListModel.TotalAmountCollection));
+
                         } else {
                             Toast.makeText(getBaseContext(), "Error while loading bills.", Toast.LENGTH_LONG).show();
                         }
