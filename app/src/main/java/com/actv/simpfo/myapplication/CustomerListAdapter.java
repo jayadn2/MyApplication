@@ -112,7 +112,7 @@ public class CustomerListAdapter extends ArrayAdapter<CustomerJson>  implements 
                         //If you find a match, add it to your new ArrayList
                         //I'm not sure how you're going to do comparison, so you'll need to fill out this conditional
                         String custId = String.valueOf(data.getID());
-                        if(data.getCustomerName().toLowerCase().contains(charSequence.toString()) || custId.toLowerCase().contains(charSequence))
+                        if(data.getCustomerName().toLowerCase().contains(charSequence) || custId.toLowerCase().contains(charSequence))
                         {
                             filterResultsData.add(data);
                         }

@@ -112,7 +112,9 @@ public class CollectionReportAdapter extends ArrayAdapter<MobileCollectionRespon
                         //If you find a match, add it to your new ArrayList
                         //I'm not sure how you're going to do comparison, so you'll need to fill out this conditional
                         String custId = String.valueOf(data.CustomerId);
-                        if(data.CustomerName.toLowerCase().contains(charSequence.toString()) || custId.toLowerCase().contains(charSequence))
+
+                        if(data.CustomerName.toLowerCase().contains(charSequence) || custId.toLowerCase().contains(charSequence)
+                                || data.RecieptNo.contains(charSequence) || data.CollectionDate.contains(charSequence))
                         {
                             filterResultsData.add(data);
                         }

@@ -77,7 +77,7 @@ Example of the request:
         }  catch (IOException e) {
             e.printStackTrace();
         }
-        if(responseObj != null)
+        if(responseObj != null && responseObj.getEntity() != null)
         {
             BufferedReader reader = null;
             try {

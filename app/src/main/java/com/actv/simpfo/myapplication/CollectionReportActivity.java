@@ -85,7 +85,7 @@ public class CollectionReportActivity extends ListActivity {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-                CollectionReportAdapter.getFilter().filter(cs);
+                collectionReportAdapter.getFilter().filter(cs);
             }
 
             @Override
@@ -145,25 +145,37 @@ public class CollectionReportActivity extends ListActivity {
     }
 
     public void searchOnDateButtonClick(View view) {
-        collectionRequest.EmpId = AppGlobals.EmpId;
-        collectionRequest.SearchOnBillNumber = false;
-        collectionRequest.FromDate = fromDateView.getText().toString();
-        if (toDateView.getText().toString() == "")
-            toDateView.setText(fromDateView.getText());
-        collectionRequest.FromDate = toDateView.getText().toString();
-        PerformSearch();
+        if(fromDateView.getText().toString() == null || fromDateView.getText().toString().length() ==0)
+        {
+            Toast.makeText(getBaseContext(), "Please enter correct from date. ", Toast.LENGTH_LONG).show();
+        }
+        else {
+            collectionRequest.EmpId = AppGlobals.EmpId;
+            collectionRequest.SearchOnBillNumber = false;
+            collectionRequest.FromDate = fromDateView.getText().toString();
+            if (toDateView.getText().toString() == "")
+                toDateView.setText(fromDateView.getText());
+            collectionRequest.ToDate = toDateView.getText().toString();
+            PerformSearch();
+        }
     }
 
     public void searchOnBillNumButtonClick(View view)
     {
-        collectionRequest.EmpId = AppGlobals.EmpId;
-        collectionRequest.SearchOnBillNumber = true;
-        collectionRequest.StartBillNumber =  billNumFromEditText.getText().toString();
+        if(billNumFromEditText.getText().toString() == null || billNumFromEditText.getText().toString().length() ==0)
+        {
+            Toast.makeText(getBaseContext(), "Please enter correct start bill number. ", Toast.LENGTH_LONG).show();
+        }
+        else {
+            collectionRequest.EmpId = AppGlobals.EmpId;
+            collectionRequest.SearchOnBillNumber = true;
+            collectionRequest.StartBillNumber = billNumFromEditText.getText().toString();
 
-        if(billNumToEditText.getText().toString() == "")
-            billNumToEditText.setText(billNumFromEditText.getText());
-        collectionRequest.EndBillNumber =  billNumToEditText.getText().toString();
-        PerformSearch();
+            if (billNumToEditText.getText().toString() == "")
+                billNumToEditText.setText(billNumFromEditText.getText());
+            collectionRequest.EndBillNumber = billNumToEditText.getText().toString();
+            PerformSearch();
+        }
     }
 
     private void PerformSearch()
@@ -199,20 +211,33 @@ public class CollectionReportActivity extends ListActivity {
                         //customerListAdapter.add(result.get(i));
                         //}
                         //customerListAdapter.notifyDataSetChanged();
-                        if (result != null && result.size() > 0) {
+                        setListAdapter(null);
+                        numOfBillsEditText.setText("");
+                        amountCollectedEditText.setText("");
+                        if (result != null && result.size() > 0 ) {
                             MobileCollectionResponseListModel responseListModel = result.get(0);
                             ArrayList<MobileCollectionResponseModel> collectionResponseModel = responseListModel.ReslutCollection;
 
+                            if(collectionResponseModel == null) {
+                                Toast.makeText(getBaseContext(), "No results to display.", Toast.LENGTH_LONG).show();
+                            }
+                            else {
+                                collectionReportAdapter = new CollectionReportAdapter(currentActivity, R.layout.collection_report_row, collectionResponseModel);
+                                setListAdapter(collectionReportAdapter);
+                                collectionReportAdapter.notifyDataSetChanged();
+                                numOfBillsEditText.setText(String.valueOf(responseListModel.NoOfBills));
+                                amountCollectedEditText.setText(String.valueOf(responseListModel.TotalAmountCollection));
+                            }
 
-                            collectionReportAdapter = new CollectionReportAdapter(currentActivity, R.layout.collection_report_row, collectionResponseModel);
-                            setListAdapter(collectionReportAdapter);
-                            collectionReportAdapter.notifyDataSetChanged();
-                            numOfBillsEditText.setText(String.valueOf(responseListModel.NoOfBills));
-                            amountCollectedEditText.setText(String.valueOf(responseListModel.TotalAmountCollection));
-
-                        } else {
+                        }
+                        else if(result.size() <= 0)
+                        {
+                            Toast.makeText(getBaseContext(), "No results to display.", Toast.LENGTH_LONG).show();
+                        }
+                        else {
                             Toast.makeText(getBaseContext(), "Error while loading bills.", Toast.LENGTH_LONG).show();
                         }
+
                     }
                 }
             });

@@ -121,6 +121,7 @@
             android:ems="10"
             android:id="@+id/amountCollectedEditText"
             android:layout_weight="1"
+            android:editable="false"
             />
         </LinearLayout>
 

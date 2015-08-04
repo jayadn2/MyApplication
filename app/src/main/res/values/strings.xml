@@ -13,7 +13,7 @@
     <string name="customer_number">Customer Number</string>
     <string name="customer_name">Customer Name</string>
     <string name="customer_address">Customer Address</string>
-    <string name="colon">: </string>
+    <string name="colon">:  </string>
     <string name="space"> </string>
     <string name="last_payment">Last Payment</string>
     <string name="last_payment_date">Last Payment Date</string>
@@ -40,4 +40,5 @@
     <string name="submit">Submit</string>
     <string name="num_of_bills_found">No. of bills</string>
     <string name="amount_collected">Amount Collected</string>
+    <string name="collection_date">Collection Date</string>
 </resources>
