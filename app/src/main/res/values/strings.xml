@@ -41,4 +41,5 @@
     <string name="num_of_bills_found">No. of bills</string>
     <string name="amount_collected">Amount Collected</string>
     <string name="collection_date">Collection Date</string>
+    <string name="search_result">Search Result</string>
 </resources>

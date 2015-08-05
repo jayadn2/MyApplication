@@ -41,7 +41,7 @@ public class CollectionReportActivity extends ListActivity {
     private EditText collectionFilterEditText;
     private EditText numOfBillsEditText;
     private EditText amountCollectedEditText;
-    //private ListView resultListView;
+    private TextView searchResultBasedOnTextView;
     private int year, month, day;
     private CheckBox allCustomersCheckBox;
     private CollectionReportAdapter collectionReportAdapter;
@@ -70,7 +70,7 @@ public class CollectionReportActivity extends ListActivity {
         collectionFilterEditText = (EditText) findViewById(R.id.collectionFilterEditText);
         numOfBillsEditText = (EditText) findViewById(R.id.numOfBillsEditText);
         amountCollectedEditText = (EditText) findViewById(R.id.amountCollectedEditText);
-
+        searchResultBasedOnTextView = (TextView) findViewById(R.id.searchResultBasedOnTextView);
         collectionRequest = new MobileCollectionRequestModel();
 
         calendar = Calendar.getInstance();
@@ -157,6 +157,7 @@ public class CollectionReportActivity extends ListActivity {
                 toDateView.setText(fromDateView.getText());
             collectionRequest.ToDate = toDateView.getText().toString();
             PerformSearch();
+            SetSearchReslutBasedOnText("date");
         }
     }
 
@@ -175,6 +176,7 @@ public class CollectionReportActivity extends ListActivity {
                 billNumToEditText.setText(billNumFromEditText.getText());
             collectionRequest.EndBillNumber = billNumToEditText.getText().toString();
             PerformSearch();
+            SetSearchReslutBasedOnText("bill");
         }
     }
 
@@ -185,6 +187,19 @@ public class CollectionReportActivity extends ListActivity {
         PerformGetCollectionReportTask task = new PerformGetCollectionReportTask();
         task.execute("");
         progressDialog.setOnCancelListener(new CancelTaskOnCancelListener(task));
+    }
+
+    private void SetSearchReslutBasedOnText(String basedOn)
+    {
+        switch (basedOn)
+        {
+            case "date":
+                searchResultBasedOnTextView.setText("Search Result Based On Date");
+                break;
+            case "bill":
+                searchResultBasedOnTextView.setText("Search Result Based Bill Numbers");
+                break;
+        }
     }
 
     private class PerformGetCollectionReportTask extends AsyncTask<String, Void,  ArrayList<MobileCollectionResponseListModel>> {
