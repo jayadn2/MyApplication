@@ -16,6 +16,10 @@ import android.os.Handler;
 
 /**
  * Created by JaSh on 12/07/2015.
+ * Refer https://www.codeofaninja.com/2013/03/android-bluetooth-tutorial.html for more info
+ * To print image refer http://stackoverflow.com/questions/14530058/how-can-i-print-an-image-on-a-bluetooth-printer-in-android
+ *
+ *
  */
 public class PrintHelper {
 
@@ -41,6 +45,19 @@ public class PrintHelper {
     private static int maxCharInALine = 40;
     private static String dividerLine = "----------------------------------------";
     private static String lineFeed = "                                        ";
+    private static byte[] BTPC_PRINT_LINE_FEED = { 10 };
+    private static byte[] BTPC_PRINT_LOGO = { 27, 47 };
+    private static byte[] BTPC_PRINT_LINE_FEED_LOGO = { 10, 27, 47 };
+    private static byte[] BTPC_SET_FONT_SIZE_NORMAL = { 27, 33 };
+    private static byte[] BTPC_SET_FONT_SIZE_DOUBLE_HEIGHT = { 27, 33, 15 };
+    private static byte[] BTPC_SET_FONT_SIZE_DOUBLE_WIDTH = { 27, 33, -16 };
+    private static byte[] BTPC_SET_FONT_SIZE_DOUBLE_W_H = { 27, 33, -1 };
+    private static byte[] BTPC_SET_FONT_STYLE_REGULAR = { 27, 116 };
+    private static byte[] BTPC_SET_FONT_STYLE_BOLD = { 27, 116, 1 };
+    private static byte[] BTPC_SET_FONT_KANNADA = { 27, 116, 10 };
+    private static byte[] BTPC_DISABLE_AUTO_SWITCHOFF = { 27, 65 };
+    private static byte[] BTPC_SET_ALIGNMENT_LEFT = { 27, 16 };
+    private static byte[] BTPC_SET_ALIGNMENT_CENTER = { 27, 16, 1 };
 
     public PrintHelper()    {    }
 
@@ -226,6 +243,8 @@ public class PrintHelper {
             // the text typed by the user
             msg += "\n";
 
+            //mmOutputStream.write(msg.getBytes());
+
             mmOutputStream.write(msg.getBytes());
 
             // tell the user data were sent
@@ -281,23 +300,39 @@ public class PrintHelper {
         return resultString;
     }
 
-    public static void TestPrint(String testString)
-    {
+    public static void TestPrint(String testString) {
+        //Print to the printer
+        testString = AdjustToCentre(testString);
+        PrintString(testString);
+    }
+
+    public static void TestPrint(String columnName, String valueString) {
+        //Print to the printer
+        String testString = CombineColumnNameAndValue(columnName, valueString);
+        PrintString(testString);
+    }
+
+    private static void PrintString(String textToPrint) {
         //Print to the printer
         try {
-            testString = AdjustToCentre(testString);
-            sendData(testString);
+            sendData(textToPrint);
         } catch (IOException ex) {
         }
     }
 
-    public static void TestPrint(String columnName, String valueString)
-    {
-        //Print to the printer
+    public static void FeedLine() {
+        //Print a blank line
         try {
-            String testString = CombineColumnNameAndValue(columnName, valueString);
-            sendData(testString);
-        } catch (IOException ex) {
+            // the text typed by the user
+            mmOutputStream.write(BTPC_PRINT_LINE_FEED);
+
+            // tell the user data were sent
+            statusMessage = "Data Sent";
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

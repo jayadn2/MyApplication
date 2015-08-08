@@ -42,4 +42,8 @@
     <string name="amount_collected">Amount Collected</string>
     <string name="collection_date">Collection Date</string>
     <string name="search_result">Search Result</string>
+    <string name="printer_name">Printer Name</string>
+    <string name="printer_status">Printer Status</string>
+    <string name="connect">Connect</string>
+    <string name="ok">OK</string>
 </resources>

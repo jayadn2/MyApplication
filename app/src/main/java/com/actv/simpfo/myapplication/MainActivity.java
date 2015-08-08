@@ -2,6 +2,7 @@ package com.actv.simpfo.myapplication;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -182,8 +183,11 @@ public class MainActivity extends ActionBarActivity {
         switch (id) {
             case R.id.print_test:
                 //mBtp.printLogo();
-                PrintHelper.TestPrint("Siti");
-                PrintHelper.TestPrint("Name", "Jayachandra");
+                //PrintHelper.TestPrint("Siti");
+                //PrintHelper.TestPrint("Name", "Jayachandra");
+                //Display the dialog here.
+                DialogFragment newFragment = new PrinterTestDialogFragment();
+                newFragment.show(getFragmentManager(), "PrintTestDialog");
                 return true;
             case R.id.action_connect_device:
                 // show a dialog to select from the list of available printers
