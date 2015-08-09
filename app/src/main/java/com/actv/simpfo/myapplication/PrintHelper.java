@@ -42,9 +42,9 @@ public class PrintHelper {
     private static volatile boolean stopWorker;
     private static String statusMessage;
 
-    private static int maxCharInALine = 40;
-    private static String dividerLine = "----------------------------------------";
-    private static String lineFeed = "                                        ";
+    private static int maxCharInALine = 38;
+    private static String dividerLine = "--------------------------------------";
+    private static String lineFeed = "                                      ";
     private static byte[] BTPC_PRINT_LINE_FEED = { 10 };
     private static byte[] BTPC_PRINT_LOGO = { 27, 47 };
     private static byte[] BTPC_PRINT_LINE_FEED_LOGO = { 10, 27, 47 };
@@ -156,14 +156,19 @@ public class PrintHelper {
             // Standard SerialPortService ID
             UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
             mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
-            mmSocket.connect();
-            mmOutputStream = mmSocket.getOutputStream();
-            mmInputStream = mmSocket.getInputStream();
+            int state = mBluetoothAdapter.getState()
+            if (mmSocket.isConnected()) {
+                isConnected = true;
+            }
+            else {
+                mmSocket.connect();
+                mmOutputStream = mmSocket.getOutputStream();
+                mmInputStream = mmSocket.getInputStream();
 
-            beginListenForData();
+                beginListenForData();
 
-            //myLabel.setText("Bluetooth Opened");
-            isConnected = true;
+                isConnected = true;
+            }
         } catch (NullPointerException e) {
             e.printStackTrace();
             isConnected = false;
@@ -243,7 +248,7 @@ public class PrintHelper {
             // the text typed by the user
             msg += "\n";
 
-            //mmOutputStream.write(msg.getBytes());
+            mmOutputStream.write(BTPC_SET_FONT_STYLE_BOLD);
 
             mmOutputStream.write(msg.getBytes());
 

@@ -42,4 +42,6 @@ public class AppGlobals {
 
     public static String CompanyName = "SITI";
 
+    public static boolean IsBluetoothConnected;
+
 }

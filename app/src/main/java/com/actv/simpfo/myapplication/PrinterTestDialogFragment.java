@@ -50,21 +50,36 @@ public class PrinterTestDialogFragment extends DialogFragment {
         connectButton = (Button) view.findViewById(R.id.connectButton);
         printTestButton = (Button) view.findViewById(R.id.printTestButton);
 
+        SetPrinterStatus();
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Connect to the Bluetooth Printer
                 PrintHelper.ConnectToPrinter();
+                SetPrinterStatus();
             }
         });
         printTestButton.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View v) {
+                                                   SetPrinterStatus();
                                                    //Test print
                                                    PrintHelper.TestPrint("Siti");
                                                    PrintHelper.TestPrint("Hi..", "This is test print..");
                                                    PrintHelper.FeedLine();
                                                }
                                            });
+    }
+
+    private void SetPrinterStatus()
+    {
+        if(PrintHelper.IsConnected())
+        {
+            printerStatusTextView.setText("Connected.");
+        }
+        else {
+            printerStatusTextView.setText("Disconnected.");
+        }
+        printerNameTextView.setText(AppGlobals.PrinterName);
     }
 }
