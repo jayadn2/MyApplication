@@ -71,7 +71,7 @@ public class PrinterTestDialogFragment extends DialogFragment {
                                            });
     }
 
-    private void SetPrinterStatus()
+    public void SetPrinterStatus()
     {
         if(PrintHelper.IsConnected())
         {

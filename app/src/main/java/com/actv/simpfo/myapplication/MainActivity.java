@@ -4,9 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -75,7 +79,44 @@ public class MainActivity extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        IntentFilter filter1 = new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
+        IntentFilter filter2 = new IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
+        IntentFilter filter3 = new IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+        this.registerReceiver(mReceiver, filter1);
+        this.registerReceiver(mReceiver, filter2);
+        this.registerReceiver(mReceiver, filter3);
     }
+
+    //The BroadcastReceiver that listens for bluetooth broadcasts
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                //... //Device found
+            }
+            else if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
+                //Device is now connected
+                PrintHelper.ConnectToPrinter();
+                PrintHelper.SetIsConnected(true);
+                AppGlobals.printerTestDialogFragment.SetPrinterStatus();
+            }
+            else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                //Done searching
+            }
+            else if (BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals(action)) {
+                //Device is about to disconnect
+            }
+            else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
+                //Device has disconnected
+                PrintHelper.SetIsConnected(false);
+                AppGlobals.printerTestDialogFragment.SetPrinterStatus();
+            }
+        }
+    };
 
     public boolean isInternetAvailable() {
         try {
@@ -186,8 +227,7 @@ public class MainActivity extends ActionBarActivity {
                 //PrintHelper.TestPrint("Siti");
                 //PrintHelper.TestPrint("Name", "Jayachandra");
                 //Display the dialog here.
-                DialogFragment newFragment = new PrinterTestDialogFragment();
-                newFragment.show(getFragmentManager(), "PrintTestDialog");
+                AppGlobals.printerTestDialogFragment.show(getFragmentManager(), "PrintTestDialog");
                 return true;
             case R.id.action_connect_device:
                 // show a dialog to select from the list of available printers

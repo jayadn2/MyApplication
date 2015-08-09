@@ -105,6 +105,11 @@ public class PrintHelper {
         return isConnected;
     }
 
+    public static void SetIsConnected(boolean connected)
+    {
+        isConnected = connected;
+    }
+
     public static void CloseConnection()
     {
         try {
@@ -156,11 +161,9 @@ public class PrintHelper {
             // Standard SerialPortService ID
             UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
             mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
-            int state = mBluetoothAdapter.getState()
-            if (mmSocket.isConnected()) {
-                isConnected = true;
-            }
-            else {
+
+            if(!isConnected) {
+
                 mmSocket.connect();
                 mmOutputStream = mmSocket.getOutputStream();
                 mmInputStream = mmSocket.getInputStream();

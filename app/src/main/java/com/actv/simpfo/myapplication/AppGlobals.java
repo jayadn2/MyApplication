@@ -1,6 +1,7 @@
 package com.actv.simpfo.myapplication;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 
 import com.actv.simpfo.myapplication.Model.CustomerBalanceDetail;
@@ -43,5 +44,7 @@ public class AppGlobals {
     public static String CompanyName = "SITI";
 
     public static boolean IsBluetoothConnected;
+
+    public static PrinterTestDialogFragment printerTestDialogFragment = new PrinterTestDialogFragment();
 
 }
