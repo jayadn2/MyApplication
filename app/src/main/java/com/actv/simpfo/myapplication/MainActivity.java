@@ -100,7 +100,6 @@ public class MainActivity extends ActionBarActivity {
             }
             else if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
                 //Device is now connected
-                PrintHelper.ConnectToPrinter();
                 PrintHelper.SetIsConnected(true);
                 AppGlobals.printerTestDialogFragment.SetPrinterStatus();
             }
