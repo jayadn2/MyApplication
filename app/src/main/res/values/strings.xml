@@ -46,4 +46,8 @@
     <string name="printer_status">Printer Status</string>
     <string name="connect">Connect</string>
     <string name="ok">OK</string>
+    <string name="title_activity_app_settings">AppSettingsActivity</string>
+    <string name="key">Key</string>
+    <string name="save">Save</string>
+    <string name="enter_key">Enter Key</string>
 </resources>
