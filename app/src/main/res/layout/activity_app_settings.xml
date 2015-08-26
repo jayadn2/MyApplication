@@ -44,4 +44,30 @@
             android:onClick="okButtonClick"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/machine_info"
+            android:id="@+id/machineInfoTextView"
+            android:layout_weight="0.24" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/machineInfoEditText"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:hint="@string/machine_info"
+            android:editable="false" />
+
+        </LinearLayout>
+
 </LinearLayout>

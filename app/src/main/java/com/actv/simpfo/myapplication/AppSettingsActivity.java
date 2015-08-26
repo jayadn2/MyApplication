@@ -15,8 +15,15 @@ import java.util.List;
 
 public class AppSettingsActivity extends ActionBarActivity {
 
-    AppSettingsDbHelper appSettingsDbHelper;
-    EditText keyEditText;
+    private AppSettingsDbHelper appSettingsDbHelper;
+    private EditText keyEditText;
+    private EditText machineInfoEditText;
+    private AppSetting appSetting;
+
+    public AppSettingsActivity(AppSetting _appSetting) {
+        appSetting = _appSetting;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +34,8 @@ public class AppSettingsActivity extends ActionBarActivity {
 
     private void FindAllViewsById() {
         keyEditText = (EditText) findViewById(R.id.keyEditText);
+        machineInfoEditText = (EditText)findViewById(R.id.machineInfoEditText);
+        machineInfoEditText.setText(AppGlobals.MacId);
     }
 
     @Override
@@ -55,21 +64,29 @@ public class AppSettingsActivity extends ActionBarActivity {
     {
         String settingTextValue = keyEditText.getText().toString();
         //Parse the key text from the text box. If the key text is in correct format, then you proceed.
+        //Encrypted string ex = QlRQLUIwMDk1NTo6aHR0cDovL3d3dy5zaW1wZm8uaW4vc2l0aS8=
         settingTextValue = EncryptionHelper.DecryptFromBase64(settingTextValue).trim();
-
-        // Getting all Todos
-        Log.d("Get AppSetting", "Getting All AppSettings");
-
-        List<AppSetting> allToDos = appSettingsDbHelper.getAllAppSettings();
-        //There should be only one setting for the application at any time.
-        if(allToDos.size() > 0)
+        String[] paramsArray = settingTextValue.split(":");
+        if(paramsArray.length == 3) //ex = BTP-B00955::http://www.simpfo.in/siti/
         {
-            //Delete all the existing entries before inserting new one.
-            for(int i = 0 ;i <allToDos.size();i++) {
-                AppSetting setting = allToDos.get(i);
-                if (setting != null)
-                    appSettingsDbHelper.deleteAppSetting(setting.getId());
+            // Getting all Todos
+            Log.d("Get AppSetting", "Getting All AppSettings");
+
+            List<AppSetting> allToDos = appSettingsDbHelper.getAllAppSettings();
+            //There should be only one setting for the application at any time.
+            if(allToDos.size() > 0)
+            {
+                //Delete all the existing entries before inserting new one.
+                for(int i = 0 ;i <allToDos.size();i++) {
+                    AppSetting setting = allToDos.get(i);
+                    if (setting != null)
+                        appSettingsDbHelper.deleteAppSetting(setting.getId());
+                }
             }
+
+            AppSetting setting = new AppSetting(paramsArray[2], paramsArray[0], paramsArray[1]);
+            appSettingsDbHelper.createAppSetting(setting);
         }
+
     }
 }

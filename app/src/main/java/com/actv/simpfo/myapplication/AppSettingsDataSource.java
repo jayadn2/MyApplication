@@ -25,5 +25,5 @@ public class AppSettingsDataSource {
         dbHelper.close();
     }
 
-    public AppSettingsContract.AppSettings
+
 }

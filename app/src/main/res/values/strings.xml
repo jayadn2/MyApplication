@@ -50,4 +50,6 @@
     <string name="key">Key</string>
     <string name="save">Save</string>
     <string name="enter_key">Enter Key</string>
+    <string name="machine_info">Machine Info</string>
+    <string name="app_settings">App Settings</string>
 </resources>

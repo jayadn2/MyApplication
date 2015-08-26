@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,12 +28,16 @@ import android.widget.Toast;
 import android.content.DialogInterface.OnCancelListener;
 
 
+import com.actv.simpfo.myapplication.Model.AppSetting;
 import com.actv.simpfo.myapplication.Model.User;
 import com.ngx.BluetoothPrinter;
 import com.ngx.DebugLog;
 import android.app.AlertDialog.Builder;
 
 import java.net.InetAddress;
+import java.util.List;
+
+import Helper.MacHelper;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -51,6 +56,7 @@ public class MainActivity extends ActionBarActivity {
     public static final String title_connected_to = "connected: ";
     public static final String title_not_connected = "not connected";
     public String bluetoothStatus = "";
+    private AppSettingsDbHelper appSettingsDbHelper;
 
 
     @Override
@@ -86,6 +92,7 @@ public class MainActivity extends ActionBarActivity {
         this.registerReceiver(mReceiver, filter1);
         this.registerReceiver(mReceiver, filter2);
         this.registerReceiver(mReceiver, filter3);
+        AppGlobals.MacId = MacHelper.GetMacId();
     }
 
     //The BroadcastReceiver that listens for bluetooth broadcasts
@@ -167,6 +174,23 @@ public class MainActivity extends ActionBarActivity {
     };
 
 
+    private AppSetting GettAppSetting()
+    {
+        AppSetting setting = null;
+        appSettingsDbHelper = new AppSettingsDbHelper(getApplicationContext());
+        // Getting all Todos
+        Log.d("Get AppSetting", "Getting All AppSettings");
+
+        List<AppSetting> allToDos = appSettingsDbHelper.getAllAppSettings();
+        //There should be only one setting for the application at any time.
+        if(allToDos.size() > 0)
+        {
+           setting = allToDos.get(0);
+        }
+        return setting;
+    }
+
+
     private void performSearch(String query) {
         progressDialog = ProgressDialog.show(MainActivity.this,
                 "Please wait...", "Retrieving data...", true, true);
@@ -227,6 +251,11 @@ public class MainActivity extends ActionBarActivity {
                 //PrintHelper.TestPrint("Name", "Jayachandra");
                 //Display the dialog here.
                 AppGlobals.printerTestDialogFragment.show(getFragmentManager(), "PrintTestDialog");
+                return true;
+            case R.id.app_setting:
+                AppSetting setting = GettAppSetting();
+                AppSettingsActivity appSettingsActivity = new AppSettingsActivity(setting);
+                appSettingsActivity.showDialog();
                 return true;
             case R.id.action_connect_device:
                 // show a dialog to select from the list of available printers

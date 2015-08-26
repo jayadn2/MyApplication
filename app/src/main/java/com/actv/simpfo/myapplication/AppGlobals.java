@@ -20,12 +20,11 @@ public class AppGlobals {
 
     private static Context context;
 
-    public static void setContext(Context ctx){
+    public static void setContext(Context ctx) {
         context = ctx;
     }
 
-    public static Context getContext()
-    {
+    public static Context getContext() {
         return context;
     }
 
@@ -46,5 +45,7 @@ public class AppGlobals {
     public static boolean IsBluetoothConnected;
 
     public static PrinterTestDialogFragment printerTestDialogFragment = new PrinterTestDialogFragment();
+
+    public static String MacId = "";
 
 }
