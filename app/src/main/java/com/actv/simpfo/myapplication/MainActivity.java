@@ -177,7 +177,7 @@ public class MainActivity extends ActionBarActivity {
     private AppSetting GettAppSetting()
     {
         AppSetting setting = null;
-        appSettingsDbHelper = new AppSettingsDbHelper(getApplicationContext());
+        appSettingsDbHelper = new AppSettingsDbHelper(this);//getApplicationContext());
         // Getting all Todos
         Log.d("Get AppSetting", "Getting All AppSettings");
 
@@ -254,8 +254,9 @@ public class MainActivity extends ActionBarActivity {
                 return true;
             case R.id.app_setting:
                 AppSetting setting = GettAppSetting();
-                AppSettingsActivity appSettingsActivity = new AppSettingsActivity(setting);
-                appSettingsActivity.showDialog();
+                AppSettingsActivity appSettingsActivity = new AppSettingsActivity();
+                appSettingsActivity.setAppSetting(setting);
+                appSettingsActivity.show(getFragmentManager(), "App Settings Dialog");
                 return true;
             case R.id.action_connect_device:
                 // show a dialog to select from the list of available printers

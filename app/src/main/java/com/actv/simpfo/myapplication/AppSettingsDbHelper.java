@@ -39,7 +39,7 @@ public class AppSettingsDbHelper extends SQLiteOpenHelper {
                     COLUMN_NAME_ID + " INTEGER PRIMARY KEY," +
                     COLUMN_NAME_SERVER + TEXT_TYPE + COMMA_SEP +
                     COLUMN_NAME_PNAME + TEXT_TYPE + COMMA_SEP +
-                    COLUMN_NAME_PMAC + TEXT_TYPE + COMMA_SEP +
+                    COLUMN_NAME_PMAC + TEXT_TYPE +
             " )";
 
     private static final String SQL_DELETE_APPSETTING =
