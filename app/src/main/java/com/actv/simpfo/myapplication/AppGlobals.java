@@ -38,7 +38,11 @@ public class AppGlobals {
 
     public static Activity MainActivity;
 
-    public static String PrinterName = "BTP-B00955";
+    public static String PrinterName = "";//"BTP-B00955";
+
+    public static String PrinterMac = "";
+
+    public static String ServerUrl = "";
 
     public static String CompanyName = "SITI";
 

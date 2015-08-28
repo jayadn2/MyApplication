@@ -57,6 +57,7 @@ public class MainActivity extends ActionBarActivity {
     public static final String title_not_connected = "not connected";
     public String bluetoothStatus = "";
     private AppSettingsDbHelper appSettingsDbHelper;
+    private AppSetting setting;
 
 
     @Override
@@ -226,8 +227,17 @@ public class MainActivity extends ActionBarActivity {
 
     private void FindAllViewsById() {
         userNameEditText = (EditText) findViewById(R.id.username_edit_text);
-        passwordEditText = (EditText)findViewById(R.id.password_edit_text);
+        passwordEditText = (EditText) findViewById(R.id.password_edit_text);
         loginButton = (Button) findViewById(R.id.login_button);
+        setting = GettAppSetting();
+        if (setting == null)
+            Toast.makeText(getBaseContext(), "Please add the correct key to continue.", Toast.LENGTH_LONG).show();
+        else
+        {
+            AppGlobals.PrinterName = setting.getPname();
+            AppGlobals.PrinterMac = setting.getPmac();
+            AppGlobals.ServerUrl = setting.getServer();
+        }
     }
 
     public void longToast(CharSequence message) {
@@ -253,7 +263,6 @@ public class MainActivity extends ActionBarActivity {
                 AppGlobals.printerTestDialogFragment.show(getFragmentManager(), "PrintTestDialog");
                 return true;
             case R.id.app_setting:
-                AppSetting setting = GettAppSetting();
                 AppSettingsActivity appSettingsActivity = new AppSettingsActivity();
                 appSettingsActivity.setAppSetting(setting);
                 appSettingsActivity.show(getFragmentManager(), "App Settings Dialog");

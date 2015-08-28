@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public abstract class GenericSeeker<E> {
-    protected static final String BASE_URL = "http://www.simpfo.in/siti/"; // 10.0.2.2:802/ , http://192.168.0.100:802/, http://192.168.0.100/ActvAndroidApp/, http://www.simpfo.in/siti/
+    protected static String BASE_URL = AppGlobals.ServerUrl;//"http://www.simpfo.in/siti/"; // 10.0.2.2:802/ , http://192.168.0.100:802/, http://192.168.0.100/ActvAndroidApp/, http://www.simpfo.in/siti/
     protected static final String SLASH = "/";
     protected HttpRetriever httpRetriever = new HttpRetriever();
     public abstract ArrayList<E> find(String query);
@@ -22,6 +22,7 @@ public abstract class GenericSeeker<E> {
     private String empId = "";
 
     protected String constructSearchUrl(String query) {
+        BASE_URL = AppGlobals.ServerUrl;
         StringBuffer sb = new StringBuffer();
         sb.append(BASE_URL);
         sb.append(retrieveSearchMethodPath());
