@@ -10,9 +10,26 @@
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent" android:orientation="vertical"
-        android:background="@android:color/darker_gray">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:id="@+id/printerStatusImageView"
+            android:src="@drawable/printer_connected" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/connect_printer"
+            android:id="@+id/connectToPrinterButton" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -136,4 +153,5 @@
         android:layout_height="wrap_content" android:text="@string/print" android:visibility="invisible"/>
 </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

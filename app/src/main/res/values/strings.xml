@@ -52,4 +52,5 @@
     <string name="enter_key">Enter Key</string>
     <string name="machine_info">Machine Info</string>
     <string name="app_settings">App Settings</string>
+    <string name="connect_printer">Connect To Printer</string>
 </resources>

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,8 @@ public class CustomerBillActivity extends ActionBarActivity {
     private String enteredAmount;
     private GenericSeeker<MobileCollectionJson> collectionSeeker = new CollectionEntry();
     private MobileCollectionJson collectionEntry;
+    private ImageView printerStatusImageView;
+    private Button connectToPrinterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +60,6 @@ public class CustomerBillActivity extends ActionBarActivity {
         //Clear the previously set value.
         AppGlobals.SelectedCollectionEntry = null;
         AppGlobals.SelectedCustomerBalanceDetail = null;
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UpdateBalance();
-            }
-        });
         GetCustomerBalance();
         InputMethodManager inputMethodManager=(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         if (inputMethodManager != null){
@@ -88,6 +85,22 @@ public class CustomerBillActivity extends ActionBarActivity {
         paymentAmountEditTextView = (EditText) findViewById(R.id.paymentAmount_edit_text_view);
         addButton = (Button) findViewById(R.id.add_Button_view);
         printButton = (Button) findViewById(R.id.print_Button_view);
+        printerStatusImageView = (ImageView) findViewById(R.id.printerStatusImageView);
+        connectToPrinterButton = (Button) findViewById(R.id.connectToPrinterButton);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateBalance();
+            }
+        });
+        connectToPrinterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConnectToPrinter();
+            }
+        });
+        UpdatePrintStatus();
     }
 
     private void ShowPrintDialog()
@@ -120,6 +133,19 @@ public class CustomerBillActivity extends ActionBarActivity {
         PerformGetCustomerBalanceTask task = new PerformGetCustomerBalanceTask();
         task.execute(String.valueOf(custId));
         progressDialog.setOnCancelListener(new CancelTaskOnCancelListener(task));
+    }
+
+    private void ConnectToPrinter()
+    {
+        PrintHelper.ConnectToPrinter();
+        UpdatePrintStatus();
+    }
+
+    private void UpdatePrintStatus() {
+        if (PrintHelper.IsConnected())
+            printerStatusImageView.setImageResource(R.drawable.printer_connected);
+        else
+            printerStatusImageView.setImageResource(R.drawable.printer_disconnected);
     }
 
     @Override
