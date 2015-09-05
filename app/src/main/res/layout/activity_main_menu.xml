@@ -7,9 +7,9 @@
     tools:context="com.actv.simpfo.myapplication.MainMenu" android:orientation="vertical" android:gravity="center_vertical|center_horizontal">
 
         <Button
-            android:layout_width="wrap_content" android:id="@+id/collection_report"
+            android:layout_width="match_parent" android:id="@+id/collection_report"
             android:layout_height="wrap_content" android:text="@string/collection_report" android:width="150dp"/>
         <Button
-            android:layout_width="wrap_content" android:id="@+id/customer_list"
+            android:layout_width="match_parent" android:id="@+id/customer_list"
             android:layout_height="wrap_content" android:text="@string/customer_list"  android:width="150dp"/>
     </LinearLayout>

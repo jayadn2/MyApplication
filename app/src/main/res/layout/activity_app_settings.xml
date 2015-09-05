@@ -1,58 +1,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="wrap_content" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/key"
-            android:id="@+id/textView"
-            android:layout_weight="0.24" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/key"
+        android:id="@+id/textView"
+        android:layout_weight="0.24"
+        android:layout_gravity="center_horizontal" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/keyEditText"
-            android:layout_weight="1"
-            android:inputType="text"
-            android:hint="@string/enter_key" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:orientation="horizontal"
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/machine_info"
-            android:id="@+id/machineInfoTextView"
-            android:layout_weight="0.24" />
+        android:id="@+id/keyEditText"
+        android:layout_weight="1"
+        android:inputType="text"
+        android:hint="@string/enter_key"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="false" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/machineInfoEditText"
-            android:layout_weight="1"
-            android:inputType="text"
-            android:hint="@string/machine_info"
-            android:editable="false" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/machine_info"
+        android:id="@+id/machineInfoTextView"
+        android:layout_weight="0.24"
+        android:layout_gravity="center_horizontal" />
 
-        </LinearLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/machineInfoEditText"
+        android:layout_weight="1"
+        android:inputType="text"
+        android:hint="@string/machine_info"
+        android:editable="false"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

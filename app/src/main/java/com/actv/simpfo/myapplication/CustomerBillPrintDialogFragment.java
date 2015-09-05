@@ -21,6 +21,9 @@ public class CustomerBillPrintDialogFragment extends DialogFragment {
     private TextView receiptNumberTextView;
     private TextView amountTextView;
     private TextView billDateTextView;
+    private TextView lastBalanceTextView;
+    private TextView currentBalanceTextView;
+
     private   MobileCollectionJson selectedCollectionEntry;
     private View view;
     PrintLine printLine;
@@ -51,6 +54,11 @@ public class CustomerBillPrintDialogFragment extends DialogFragment {
                         PrintHelper.PrintLines.add(printLine);
 
                         printLine = new PrintLine();
+                        printLine.Header = "Last Balance";
+                        printLine.Value = lastBalanceTextView.getText().toString();
+                        PrintHelper.PrintLines.add(printLine);
+
+                        printLine = new PrintLine();
                         printLine.Header = "Receipt No.";
                         printLine.Value = receiptNumberTextView.getText().toString();
                         PrintHelper.PrintLines.add(printLine);
@@ -64,6 +72,11 @@ public class CustomerBillPrintDialogFragment extends DialogFragment {
                         printLine.Header = "Date";
                         printLine.Value = billDateTextView.getText().toString();
                         PrintHelper.PrintLines.add(printLine);
+
+                        printLine = new PrintLine();
+                        printLine.Header = "Current Balance";
+                        printLine.Value = currentBalanceTextView.getText().toString();
+                        PrintHelper.PrintLines.add(printLine);
                         PrintHelper.Print();
                     }
                 });
@@ -72,11 +85,13 @@ public class CustomerBillPrintDialogFragment extends DialogFragment {
     }
 
     private void FindAllViewsById() {
-        customerCustIdTextView =(TextView) view.findViewById(R.id.custid_bill_print_text_view);
-        customerCustNameTextView = (TextView) view.findViewById(R.id.name_bill_print_text_view);
-        receiptNumberTextView = (TextView) view.findViewById(R.id.receipt_number_bill_print_text_view);
-        amountTextView = (TextView) view.findViewById(R.id.receipt_amount_bill_print_text_view);
-        billDateTextView = (TextView) view.findViewById(R.id.receipt_date_bill_print_text_view);
+        customerCustIdTextView =(TextView) view.findViewById(R.id.customerCustIdTextView);
+        customerCustNameTextView = (TextView) view.findViewById(R.id.customerCustNameTextView);
+        receiptNumberTextView = (TextView) view.findViewById(R.id.receiptNumberTextView);
+        amountTextView = (TextView) view.findViewById(R.id.amountTextView);
+        billDateTextView = (TextView) view.findViewById(R.id.billDateTextView);
+        lastBalanceTextView = (TextView) view.findViewById(R.id.lastBalanceTextView);
+        currentBalanceTextView = (TextView) view.findViewById(R.id.currentBalanceTextView);
 
         selectedCollectionEntry = AppGlobals.SelectedCollectionEntry;
         if(selectedCollectionEntry != null) {
@@ -86,14 +101,24 @@ public class CustomerBillPrintDialogFragment extends DialogFragment {
             if (customerCustNameTextView != null)
                 customerCustNameTextView.setText(AppGlobals.SelectedCustomerBalanceDetail.getCustName());
 
-            if(receiptNumberTextView != null)
+            if (receiptNumberTextView != null)
                 receiptNumberTextView.setText(selectedCollectionEntry.RecieptNo);
 
-            if(amountTextView != null)
+            if (amountTextView != null)
                 amountTextView.setText(selectedCollectionEntry.Amount);
 
-            if(billDateTextView != null)
+            if (billDateTextView != null)
                 billDateTextView.setText(selectedCollectionEntry.CollectionDate);
+
+            if (lastBalanceTextView != null)
+                lastBalanceTextView.setText(selectedCollectionEntry.LastBalance);
+
+            int amountEntered = HelperClass.stringToInt(selectedCollectionEntry.Amount, 0);
+            int lastBalance = HelperClass.stringToInt(selectedCollectionEntry.LastBalance, 0);
+            int currentBalance = lastBalance - amountEntered;
+
+            if(currentBalanceTextView != null)
+            currentBalanceTextView.setText(String.valueOf(currentBalance));
 
         }
     }

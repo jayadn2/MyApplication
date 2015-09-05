@@ -128,7 +128,6 @@ public class MainActivity extends ActionBarActivity {
     public boolean isInternetAvailable() {
         try {
             InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
-
             if (ipAddr.equals("")) {
                 return false;
             } else {
@@ -285,7 +284,7 @@ public class MainActivity extends ActionBarActivity {
                                 if (mBtp.unPairBluetoothPrinters()) {
                                     Toast.makeText(
                                             getApplicationContext(),
-                                            "All NGX Bluetooth printer(s) unpaired",
+                                            "All Bluetooth printer(s) unpaired",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }

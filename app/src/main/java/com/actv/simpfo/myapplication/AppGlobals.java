@@ -52,4 +52,13 @@ public class AppGlobals {
 
     public static String MacId = "";
 
+    //Appsettings ex = BTP-B00955""http://www.simpfo.in/siti/
+    //After encryption = QlRQLUIwMDk1NSIiaHR0cDovL3d3dy5zaW1wZm8uaW4vc2l0aS8=
+
+    //BTP-B00955""http://192.168.0.100/ActvAndroidApp/
+    //After encryption = QlRQLUIwMDk1NSIiaHR0cDovLzE5Mi4xNjguMC4xMDAvQWN0dkFuZHJvaWRBcHAv
+
+    //BTP-B00955""http://192.168.0.101/ActvAndroidApp/
+    //After encryption = QlRQLUIwMDk1NSIiaHR0cDovLzE5Mi4xNjguMC4xMDAvQWN0dkFuZHJvaWRBcHAv
+
 }

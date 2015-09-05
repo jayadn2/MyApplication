@@ -17,4 +17,5 @@ public class MobileCollectionJson {
     public String EmpId;
     public String GpsLocation;
     public String LedgerUpdated;
+    public String LastBalance;
 }

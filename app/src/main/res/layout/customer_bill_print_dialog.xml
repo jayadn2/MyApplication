@@ -3,97 +3,143 @@
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
     >
 
-    <LinearLayout
+    <GridLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:orientation="horizontal" android:layout_gravity="center_horizontal" android:layout_marginTop="20px" android:layout_marginBottom="20px">
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="8"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView android:text="@string/customer_number" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_gravity="right" />
+
+        <TextView
+            android:id="@+id/customerCustIdTextView"
+            android:text="@string/customer_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:text="@string/customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:id="@+id/textView6"
+            android:layout_column="0"
+            android:layout_row="2"
+            android:layout_gravity="right" />
+
+        <TextView
+            android:id="@+id/customerCustNameTextView"
+            android:text="@string/customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_marginLeft="10dp" />
 
         <TextView android:text="@string/company_name" android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            style="@style/Base.TextAppearance.AppCompat.Large" />
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:layout_columnSpan="2"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:orientation="horizontal">
-
-        <TextView android:text="@string/customer_number" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-        <TextView android:text="@string/colon"
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+            android:layout_height="wrap_content"
+            android:text="@string/last_balance"
+            android:id="@+id/lastBalanceLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_gravity="right" />
 
-        <TextView android:id="@+id/custid_bill_print_text_view" android:text="@string/customer_number" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:orientation="horizontal">
-
-        <TextView android:text="@string/customer_name" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-        <TextView android:text="@string/colon"
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+            android:layout_height="wrap_content"
+            android:text="@string/last_balance"
+            android:id="@+id/lastBalanceTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_column="1"
+            android:layout_row="3"
+            android:layout_marginLeft="10dp" />
 
-        <TextView android:id="@+id/name_bill_print_text_view" android:text="@string/customer_name" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:orientation="horizontal">
-
-        <TextView android:text="@string/receipt_number" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-        <TextView android:text="@string/colon"
+        <TextView
+            android:text="@string/receipt_number"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:id="@+id/receiptLabelTextView"
+            android:layout_column="0"
+            android:layout_row="4"
+            android:layout_gravity="right" />
 
-        <TextView android:id="@+id/receipt_number_bill_print_text_view" android:text="@string/receipt_number" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView
+            android:id="@+id/receiptNumberTextView"
+            android:text="@string/receipt_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_row="4"
+            android:layout_column="1"
+            android:layout_marginLeft="10dp" />
 
         <TextView android:text="@string/amount" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_column="0"
+            android:layout_row="5"
+            android:layout_gravity="right" />
 
-        <TextView android:text="@string/colon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
-
-        <TextView android:id="@+id/receipt_amount_bill_print_text_view" android:text="@string/amount" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView android:id="@+id/amountTextView" android:text="@string/amount" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_row="5"
+            android:layout_column="1"
+            android:layout_marginLeft="10dp" />
 
         <TextView android:text="@string/bill_date" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_column="0"
+            android:layout_row="6"
+            android:layout_gravity="right" />
 
-        <TextView android:text="@string/colon"
+        <TextView android:id="@+id/billDateTextView" android:text="@string/bill_date" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_marginLeft="10dp"
+            android:layout_column="1"
+            android:layout_row="6" />
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"  android:layout_marginEnd="10dp"/>
+            android:layout_height="wrap_content"
+            android:text="@string/current_balance"
+            android:id="@+id/textView3"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_row="7"
+            android:layout_column="0"
+            android:layout_gravity="right" />
 
-        <TextView android:id="@+id/receipt_date_bill_print_text_view" android:text="@string/bill_date" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current_balance"
+            android:id="@+id/currentBalanceTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_column="1"
+            android:layout_row="7"
+            android:layout_marginLeft="10dp" />
+    </GridLayout>
 
 
 </LinearLayout>
