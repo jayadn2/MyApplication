@@ -57,7 +57,8 @@ public class CustomerListActivity extends ListActivity {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-                customerListAdapter.getFilter().filter(cs);
+                if (customerListAdapter != null && customerListAdapter.getFilter() != null)
+                    customerListAdapter.getFilter().filter(cs);
             }
 
             @Override

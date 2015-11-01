@@ -1,5 +1,6 @@
 package com.actv.simpfo.myapplication;
 
+import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,6 +52,9 @@ public class CustomerBillActivity extends ActionBarActivity {
     private MobileCollectionJson collectionEntry;
     private ImageView printerStatusImageView;
     private Button connectToPrinterButton;
+    private EditText billDateEditText;
+    private int year, month, day;
+    private Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +93,13 @@ public class CustomerBillActivity extends ActionBarActivity {
         printerStatusImageView = (ImageView) findViewById(R.id.printerStatusImageView);
         connectToPrinterButton = (Button) findViewById(R.id.connectToPrinterButton);
 
+        billDateEditText=(EditText) findViewById(R.id.billDateEditText);
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        showDate(billDateEditText, year, month + 1, day);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +115,26 @@ public class CustomerBillActivity extends ActionBarActivity {
         UpdatePrintStatus();
     }
 
+    private void showDate(EditText editText, int year, int month, int day) {
+        editText.setText(DateHelper.ConvertToFormat(year, month, day));
+    }
+
+    public void setDate(View view) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, dateListener, year, month, day);
+        datePickerDialog.show();
+    }
+
+    private DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            // TODO Auto-generated method stub
+            // arg1 = year
+            // arg2 = month
+            // arg3 = day
+            showDate(billDateEditText, arg1, arg2 + 1, arg3);
+        }
+    };
+
     private void ShowPrintDialog()
     {
         //Display the dialog here.
@@ -115,12 +147,19 @@ public class CustomerBillActivity extends ActionBarActivity {
     private void UpdateBalance()
     {
         enteredAmount = paymentAmountEditTextView.getText().toString();
-        customerBalanceDetail.setEmpId(AppGlobals.EmpId);
-        progressDialog = ProgressDialog.show(CustomerBillActivity.this,
-                "Please wait...", "Updating entry for "+ custNameTextView.getText().toString() +" ...", true, true);
-        PerformPostCustomerBalanceTask task = new PerformPostCustomerBalanceTask();
-        task.execute(String.valueOf(custId));
-        progressDialog.setOnCancelListener(new CancelTaskOnCancelListener(task));
+        if(enteredAmount==null || enteredAmount.length() == 0)
+        {
+            Toast.makeText(getBaseContext(), "Please enter valid amount.", Toast.LENGTH_LONG).show();
+        }
+        else {
+            customerBalanceDetail.setEmpId(AppGlobals.EmpId);
+            customerBalanceDetail.setCurrentPaymentDate(billDateEditText.getText().toString());
+            progressDialog = ProgressDialog.show(CustomerBillActivity.this,
+                    "Please wait...", "Updating entry for " + custNameTextView.getText().toString() + " ...", true, true);
+            PerformPostCustomerBalanceTask task = new PerformPostCustomerBalanceTask();
+            task.execute(String.valueOf(custId));
+            progressDialog.setOnCancelListener(new CancelTaskOnCancelListener(task));
+        }
     }
 
     private void GetCustomerBalance()
@@ -234,10 +273,7 @@ public class CustomerBillActivity extends ActionBarActivity {
         protected  ArrayList<MobileCollectionJson> doInBackground(String... params) {
             if(customerBalanceDetail != null) {
                 collectionSeeker.setToken(token);
-                Calendar cal = Calendar.getInstance();
-                String paymentDate = AppGlobals.AppDateFormat().format(cal.getTime());
                 customerBalanceDetail.setCurrentPayment(enteredAmount);
-                customerBalanceDetail.setCurrentPaymentDate(paymentDate);
             }
             return collectionSeeker.findPost(customerBalanceDetail);
         }
@@ -257,8 +293,11 @@ public class CustomerBillActivity extends ActionBarActivity {
                             //Display the dialog box to print the receipt.
                             AppGlobals.SelectedCollectionEntry = collectionEntry;
                             ShowPrintDialog();
+                            addButton.setEnabled(false);
+                            //printButton.setEnabled(false);
                             printButton.setVisibility(View.VISIBLE);
                             paymentAmountEditTextView.setEnabled(false);
+                            //finish();
                         }
 
 

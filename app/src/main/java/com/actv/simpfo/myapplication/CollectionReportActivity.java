@@ -85,7 +85,8 @@ public class CollectionReportActivity extends ListActivity {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-                collectionReportAdapter.getFilter().filter(cs);
+                if (collectionReportAdapter != null && collectionReportAdapter.getFilter() != null)
+                    collectionReportAdapter.getFilter().filter(cs);
             }
 
             @Override
@@ -100,6 +101,8 @@ public class CollectionReportActivity extends ListActivity {
                 // TODO Auto-generated method stub
             }
         });
+
+
     }
 
     //@SuppressWarnings("deprecation")

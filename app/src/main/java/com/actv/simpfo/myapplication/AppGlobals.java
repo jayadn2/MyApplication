@@ -14,8 +14,13 @@ import java.text.SimpleDateFormat;
  */
 public class AppGlobals {
     public static String EmpId = "";
+
+    public static int IsAdminUser;
+
     public static String Token = "";
+
     public static int SelectedCustomerId = -1;
+
     private static SimpleDateFormat curFormater = new SimpleDateFormat("dd/MM/yyyy");
 
     private static Context context;
@@ -44,7 +49,9 @@ public class AppGlobals {
 
     public static String ServerUrl = "";
 
-    public static String CompanyName = "SITI";
+    public static String CompanyName = "SITI CHANNEL";
+
+    public static String TagLine = "Challakere";
 
     public static boolean IsBluetoothConnected;
 
@@ -61,4 +68,6 @@ public class AppGlobals {
     //BTP-B00955""http://192.168.0.101/ActvAndroidApp/
     //After encryption = QlRQLUIwMDk1NSIiaHR0cDovLzE5Mi4xNjguMC4xMDAvQWN0dkFuZHJvaWRBcHAv
 
+	//BTP-B00955""http://192.168.43.81/ActvAndroidApp/
+	//QlRQLUIwMDk1NSIiaHR0cDovLzE5Mi4xNjguNDMuODEvQWN0dkFuZHJvaWRBcHAv
 }

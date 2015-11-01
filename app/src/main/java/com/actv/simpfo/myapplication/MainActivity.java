@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
@@ -24,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.DialogInterface.OnCancelListener;
 
@@ -58,6 +60,7 @@ public class MainActivity extends ActionBarActivity {
     public String bluetoothStatus = "";
     private AppSettingsDbHelper appSettingsDbHelper;
     private AppSetting setting;
+    private TextView versionTextView;
 
 
     @Override
@@ -94,8 +97,16 @@ public class MainActivity extends ActionBarActivity {
         this.registerReceiver(mReceiver, filter2);
         this.registerReceiver(mReceiver, filter3);
         AppGlobals.MacId = MacHelper.GetMacId();
+        versionTextView.setText("Version: " + BuildConfig.VERSION_NAME);
     }
 
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        Toast.makeText(getBaseContext(), AppGlobals.ServerUrl, Toast.LENGTH_SHORT).show();
+    }
     //The BroadcastReceiver that listens for bluetooth broadcasts
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -128,6 +139,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean isInternetAvailable() {
         try {
             InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
+
             if (ipAddr.equals("")) {
                 return false;
             } else {
@@ -228,11 +240,11 @@ public class MainActivity extends ActionBarActivity {
         userNameEditText = (EditText) findViewById(R.id.username_edit_text);
         passwordEditText = (EditText) findViewById(R.id.password_edit_text);
         loginButton = (Button) findViewById(R.id.login_button);
+        versionTextView = (TextView) findViewById(R.id.versionTextView);
         setting = GettAppSetting();
         if (setting == null)
             Toast.makeText(getBaseContext(), "Please add the correct key to continue.", Toast.LENGTH_LONG).show();
-        else
-        {
+        else {
             AppGlobals.PrinterName = setting.getPname();
             AppGlobals.PrinterMac = setting.getPmac();
             AppGlobals.ServerUrl = setting.getServer();
@@ -322,6 +334,13 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onStop()
+    {
+        //unregisterReceiver(mReceiver); //It is giving exception while exiting the app, so commenting the line for now.
+        super.onStop();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mBtp.onActivityResult(requestCode, resultCode, data, this);
@@ -332,16 +351,22 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            if(isInternetAvailable()) {
+            if(true){//if(isInternetAvailable()) {
                 String query = params[0];
                 String[] arr = query.split("≡");
                 if(arr.length == 2) {
                     String userName = arr[0];
                     String password = arr[1];
                     String empId = userSeeker.ValidateUser(userName, password);
-                    setEmpId(empId);
-                    AppGlobals.EmpId = empId;
-                    return getEmpId();
+                    if(empId !=null) {
+                        SetUserDetails(empId);
+                        setEmpId(AppGlobals.EmpId);
+                        return getEmpId();
+                    }
+                    else
+                    {
+                        return "-1";
+                    }
                 }
                 else
                     return "";
@@ -353,6 +378,21 @@ public class MainActivity extends ActionBarActivity {
 
         }
 
+        private void SetUserDetails(String empDetails)
+        {
+            String[] arr = empDetails.split(";");
+            if(arr.length == 2)
+            {
+                AppGlobals.EmpId = arr[0];
+                AppGlobals.IsAdminUser = Integer.parseInt(arr[1]);
+            }
+            else
+            {
+                AppGlobals.EmpId = empDetails;
+                AppGlobals.IsAdminUser = 0;
+            }
+        }
+
         @Override
         protected void onPostExecute(final String result) {
             runOnUiThread(new Runnable() {
@@ -362,7 +402,11 @@ public class MainActivity extends ActionBarActivity {
                         progressDialog.dismiss();
                         progressDialog = null;
                     }
-                    if(result == "NoInternet")
+                    if (result == "-1")
+                    {
+                        Toast.makeText(getBaseContext(), "Not able to validate user, please contact admin.", Toast.LENGTH_LONG).show();
+                    }
+                    else if(result == "NoInternet")
                     {
                         Toast.makeText(getBaseContext(), "No Internet connection. Connect to Internet and try again.", Toast.LENGTH_LONG).show();
                     }
@@ -376,10 +420,7 @@ public class MainActivity extends ActionBarActivity {
                         startActivity(i);
 
                     }
-                    else
-                    {
-                        Toast.makeText(getBaseContext(), "Wrong username or password", Toast.LENGTH_LONG).show();
-                    }
+
                 }
             });
         }

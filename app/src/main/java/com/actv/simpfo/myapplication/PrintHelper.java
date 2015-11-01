@@ -53,7 +53,7 @@ public class PrintHelper {
     private static byte[] BTPC_SET_FONT_SIZE_DOUBLE_WIDTH = { 27, 33, -16 };
     private static byte[] BTPC_SET_FONT_SIZE_DOUBLE_W_H = { 27, 33, -1 };
     private static byte[] BTPC_SET_FONT_STYLE_REGULAR = { 27, 116 };
-    private static byte[] BTPC_SET_FONT_STYLE_BOLD = { 27, 116, 1 };
+    private static byte[] BTPC_SET_FONT_STYLE_BOLD = { 27, 116, 1 }; //{ 27, 116, 1 };
     private static byte[] BTPC_SET_FONT_KANNADA = { 27, 116, 10 };
     private static byte[] BTPC_DISABLE_AUTO_SWITCHOFF = { 27, 65 };
     private static byte[] BTPC_SET_ALIGNMENT_LEFT = { 27, 16 };
@@ -71,6 +71,7 @@ public class PrintHelper {
             try {
                 Header = AdjustToCentre(AppGlobals.CompanyName);
                 sendData(Header);
+                sendData(AdjustToCentre(AppGlobals.TagLine));
                 sendData(dividerLine);
                 if(PrintLines != null && PrintLines.size() > 0)
                 {

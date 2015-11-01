@@ -1,5 +1,7 @@
 package com.actv.simpfo.myapplication;
 
+import android.widget.Toast;
+
 import com.actv.simpfo.myapplication.Model.User;
 
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -44,16 +46,23 @@ public class UserSeeker extends GenericSeeker<User> {
         if(method != null)
         {
             response = method.getResponseBodyAsString();
-            empId = method.getResponseHeader("ed").getValue().trim();
-            empId = EncryptionHelper.DecryptFromBase64(empId);
-            if(response != null) {
-                String[] responseSplitArray = response.split(":");
-                if (responseSplitArray.length > 1) {
-                    setToken(responseSplitArray[1]);
-                    setToken(getToken().replace("\"", ""));
-                    setToken(getToken().replace(",token_type", ""));
-                    AppGlobals.Token = getToken();
+            if(response!=null) {
+                empId = method.getResponseHeader("ed").getValue().trim();
+                empId = EncryptionHelper.DecryptFromBase64(empId);
+                if (response != null) {
+                    String[] responseSplitArray = response.split(":");
+                    if (responseSplitArray.length > 1) {
+                        setToken(responseSplitArray[1]);
+                        setToken(getToken().replace("\"", ""));
+                        setToken(getToken().replace(",token_type", ""));
+                        AppGlobals.Token = getToken();
+                    }
                 }
+            }
+            else
+            {
+                //There is something wrong with server, check at server side.
+                return null;
             }
         }
         return empId;
