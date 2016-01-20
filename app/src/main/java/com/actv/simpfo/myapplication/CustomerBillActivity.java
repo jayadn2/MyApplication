@@ -53,7 +53,7 @@ public class CustomerBillActivity extends ActionBarActivity {
     private ImageView printerStatusImageView;
     private Button connectToPrinterButton;
     private EditText billDateEditText;
-    private int year, month, day;
+    private static int year = 0, month = 0, day = 0;
     private Calendar calendar;
 
     @Override
@@ -95,9 +95,12 @@ public class CustomerBillActivity extends ActionBarActivity {
 
         billDateEditText=(EditText) findViewById(R.id.billDateEditText);
         calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
+        //If the form is loaded for the 1st time and no date is selected previously, set today's date.
+        if(year == 0 && month ==0 && day == 0) {
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+        }
         showDate(billDateEditText, year, month + 1, day);
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -115,8 +118,11 @@ public class CustomerBillActivity extends ActionBarActivity {
         UpdatePrintStatus();
     }
 
-    private void showDate(EditText editText, int year, int month, int day) {
-        editText.setText(DateHelper.ConvertToFormat(year, month, day));
+    private void showDate(EditText editText, int _year, int _month, int _day) {
+        editText.setText(DateHelper.ConvertToFormat(_year, _month, _day));
+        year = _year;
+        month = _month - 1;
+        day = _day;
     }
 
     public void setDate(View view) {

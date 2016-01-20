@@ -42,8 +42,6 @@ public class PrintHelper {
     private static volatile boolean stopWorker;
     private static String statusMessage;
 
-    private static int maxCharInALine = 38;
-    private static String dividerLine = "--------------------------------------";
     private static String lineFeed = "                                      ";
     private static byte[] BTPC_PRINT_LINE_FEED = { 10 };
     private static byte[] BTPC_PRINT_LOGO = { 27, 47 };
@@ -61,6 +59,15 @@ public class PrintHelper {
 
     public PrintHelper()    {    }
 
+    private static String getDividerLine()
+    {
+        String dividerLine = "";
+        for(int i=0;i<AppGlobals.PrinterCharWidth;i++) {
+            dividerLine = dividerLine + "-";
+        }
+        return dividerLine;
+    }
+
     public static void Print()
     {
         if(!isConnected)
@@ -72,7 +79,7 @@ public class PrintHelper {
                 Header = AdjustToCentre(AppGlobals.CompanyName);
                 sendData(Header);
                 sendData(AdjustToCentre(AppGlobals.TagLine));
-                sendData(dividerLine);
+                sendData(getDividerLine());
                 if(PrintLines != null && PrintLines.size() > 0)
                 {
                     for (int i = 0; i < PrintLines.size() ; i++)
@@ -142,7 +149,7 @@ public class PrintHelper {
                 for (BluetoothDevice device : pairedDevices) {
 
                     // PrinterName is the name of the bluetooth printer device
-                    if (device.getName().equals(AppGlobals.PrinterName)) {
+                    if (device.getName().equals(AppGlobals.PrinterName) || (device.getAddress().equals(AppGlobals.PrinterName))) {
                         mmDevice = device;
                         break;
                     }
@@ -285,8 +292,8 @@ public class PrintHelper {
     private static String AdjustToCentre(String stringToBeAdjusted)
     {
         int strLength = stringToBeAdjusted.length();
-        if(strLength < maxCharInALine) {
-            int noOfSpaceToPrint = (maxCharInALine / 2) - (strLength / 2);
+        if(strLength < AppGlobals.PrinterCharWidth) {
+            int noOfSpaceToPrint = (AppGlobals.PrinterCharWidth / 2) - (strLength / 2);
             for(int i = 0; i < noOfSpaceToPrint ; i++)
             {
                 stringToBeAdjusted = " " + stringToBeAdjusted;
@@ -298,7 +305,7 @@ public class PrintHelper {
     private static String CombineColumnNameAndValue(String columenName, String valueString)
     {
         String resultString = "";
-        int noOfDotsToPrint = maxCharInALine - (columenName.length() + valueString.length());
+        int noOfDotsToPrint = AppGlobals.PrinterCharWidth - (columenName.length() + valueString.length());
         int dotPrintStartPos = columenName.length() + 1;
         resultString = columenName + " ";
         for(int i = 0; i < noOfDotsToPrint - 2 ; i++)
@@ -343,6 +350,48 @@ public class PrintHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void TestBillPrint()
+    {
+        PrintLine printLine;
+        // Print the bill here ...
+        PrintHelper.PrintLines.clear();
+        printLine = new PrintLine();
+        printLine.Header = "Customer ID";
+        printLine.Value = "xxxx";
+        PrintHelper.PrintLines.add(printLine);
+
+        printLine = new PrintLine();
+        printLine.Header = "Customer Name";
+        printLine.Value = "Test Customer";
+        PrintHelper.PrintLines.add(printLine);
+
+        printLine = new PrintLine();
+        printLine.Header = "Last Balance";
+        printLine.Value = "@@@@";
+        PrintHelper.PrintLines.add(printLine);
+
+        printLine = new PrintLine();
+        printLine.Header = "Receipt No.";
+        printLine.Value = "####";
+        PrintHelper.PrintLines.add(printLine);
+
+        printLine = new PrintLine();
+        printLine.Header = "Amount";
+        printLine.Value = "$$$$";
+        PrintHelper.PrintLines.add(printLine);
+
+        printLine = new PrintLine();
+        printLine.Header = "Date";
+        printLine.Value = "1/1/2016";
+        PrintHelper.PrintLines.add(printLine);
+
+        printLine = new PrintLine();
+        printLine.Header = "Current Balance";
+        printLine.Value = "****";
+        PrintHelper.PrintLines.add(printLine);
+        PrintHelper.Print();
     }
 
 }

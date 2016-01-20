@@ -56,6 +56,10 @@
             android:name=".AppSettingsActivity"
             android:label="@string/title_activity_app_settings" >
         </activity>
+        <activity
+            android:name=".ErrorDisplayWindowActivity"
+            android:label="@string/title_activity_error_display_window" >
+        </activity>
     </application>
 
 </manifest>

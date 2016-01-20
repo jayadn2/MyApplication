@@ -109,15 +109,13 @@ public class CollectionReportActivity extends ListActivity {
     public void setFromDate(View view) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, fromDateListener, year, month, day);
         datePickerDialog.show();
-        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT)
-                .show();
+
     }
 
     public void setToDate(View view) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, toDateListener, year, month, day);
         datePickerDialog.show();
-        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT)
-                .show();
+
     }
 
     private DatePickerDialog.OnDateSetListener fromDateListener = new DatePickerDialog.OnDateSetListener() {

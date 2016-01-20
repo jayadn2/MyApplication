@@ -59,6 +59,14 @@ public class AppGlobals {
 
     public static String MacId = "";
 
+    public static int PrinterCharWidth = 38;
+
+    //Appsettings ex = 00:02:0A:04:51:5A""http://www.simpfo.in/siti/"32
+    //After encryption = MDA6MDI6MEE6MDQ6NTE6NUEiImh0dHA6Ly93d3cuc2ltcGZvLmluL3NpdGkvIjMy
+
+    //Appsettings ex = 00:02:0A:04:51:5A""http://www.simpfo.in/siti/
+    //After encryption = MDA6MDI6MEE6MDQ6NTE6NUEiImh0dHA6Ly93d3cuc2ltcGZvLmluL3NpdGkv
+
     //Appsettings ex = BTP-B00955""http://www.simpfo.in/siti/
     //After encryption = QlRQLUIwMDk1NSIiaHR0cDovL3d3dy5zaW1wZm8uaW4vc2l0aS8=
 

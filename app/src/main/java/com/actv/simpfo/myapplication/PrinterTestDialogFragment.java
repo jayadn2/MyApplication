@@ -64,9 +64,10 @@ public class PrinterTestDialogFragment extends DialogFragment {
                                                public void onClick(View v) {
                                                    SetPrinterStatus();
                                                    //Test print
-                                                   PrintHelper.TestPrint("Siti");
-                                                   PrintHelper.TestPrint("Hi..", "This is test print..");
-                                                   PrintHelper.FeedLine();
+                                                   //PrintHelper.TestPrint("Siti");
+                                                   //PrintHelper.TestPrint("Hi..", "This is test print..");
+                                                   //PrintHelper.FeedLine();
+                                                   PrintHelper.TestBillPrint();
                                                }
                                            });
     }

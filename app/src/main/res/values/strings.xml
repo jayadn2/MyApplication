@@ -55,4 +55,5 @@
     <string name="connect_printer">Connect To Printer</string>
     <string name="last_balance">Last Balance</string>
     <string name="current_balance">Current Balance</string>
+    <string name="title_activity_error_display_window">ErrorDisplayWindowActivity</string>
 </resources>

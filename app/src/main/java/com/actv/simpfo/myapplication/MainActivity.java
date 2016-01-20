@@ -66,6 +66,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
         setContentView(R.layout.activity_main);
         this.FindAllViewsById();
         AppGlobals.setContext(getBaseContext());
@@ -248,6 +249,7 @@ public class MainActivity extends ActionBarActivity {
             AppGlobals.PrinterName = setting.getPname();
             AppGlobals.PrinterMac = setting.getPmac();
             AppGlobals.ServerUrl = setting.getServer();
+            AppGlobals.PrinterCharWidth = setting.getPrinterMaxChar();
         }
     }
 

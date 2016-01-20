@@ -30,6 +30,7 @@ public class AppSettingsDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_NAME_SERVER = "server";
     public static final String COLUMN_NAME_PNAME = "pname";
     public static final String COLUMN_NAME_PMAC = "pmac";
+    public static final String COLUMN_NAME_PRINTWIDTH = "printwidth";
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
@@ -39,7 +40,8 @@ public class AppSettingsDbHelper extends SQLiteOpenHelper {
                     COLUMN_NAME_ID + " INTEGER PRIMARY KEY," +
                     COLUMN_NAME_SERVER + TEXT_TYPE + COMMA_SEP +
                     COLUMN_NAME_PNAME + TEXT_TYPE + COMMA_SEP +
-                    COLUMN_NAME_PMAC + TEXT_TYPE +
+                    COLUMN_NAME_PMAC + TEXT_TYPE + COMMA_SEP +
+                    COLUMN_NAME_PRINTWIDTH + TEXT_TYPE +
             " )";
 
     private static final String SQL_DELETE_APPSETTING =
@@ -82,6 +84,7 @@ public class AppSettingsDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NAME_SERVER, appSetting.getServer());
         values.put(COLUMN_NAME_PNAME, appSetting.getPname());
         values.put(COLUMN_NAME_PMAC, appSetting.getPmac());
+        values.put(COLUMN_NAME_PRINTWIDTH, appSetting.getPrinterMaxChar());
 
         // insert row
         long appSetting_id = db.insert(TABLE_NAME_APPSETTING, null, values);
@@ -102,6 +105,7 @@ public class AppSettingsDbHelper extends SQLiteOpenHelper {
         appSetting.setPmac(c.getString(c.getColumnIndex(COLUMN_NAME_PMAC)));
         appSetting.setPname(c.getString(c.getColumnIndex(COLUMN_NAME_PNAME)));
         appSetting.setServer(c.getString(c.getColumnIndex(COLUMN_NAME_SERVER)));
+        appSetting.setPrinterMaxChar(Integer.valueOf(c.getString(c.getColumnIndex(COLUMN_NAME_PRINTWIDTH))));
         return appSetting;
     }
 
@@ -121,6 +125,7 @@ public class AppSettingsDbHelper extends SQLiteOpenHelper {
                 appSetting.setPmac(c.getString(c.getColumnIndex(COLUMN_NAME_PMAC)));
                 appSetting.setPname(c.getString(c.getColumnIndex(COLUMN_NAME_PNAME)));
                 appSetting.setServer(c.getString(c.getColumnIndex(COLUMN_NAME_SERVER)));
+                appSetting.setPrinterMaxChar(Integer.valueOf(c.getString(c.getColumnIndex(COLUMN_NAME_PRINTWIDTH))));
                 appSettingList.add(appSetting);
             }while (c.moveToNext());
         }
@@ -135,6 +140,7 @@ public class AppSettingsDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NAME_SERVER, setting.getServer());
         values.put(COLUMN_NAME_PNAME, setting.getPname());
         values.put(COLUMN_NAME_PMAC, setting.getPmac());
+        values.put(COLUMN_NAME_PRINTWIDTH, setting.getPrinterMaxChar());
 
         return db.update(TABLE_NAME_APPSETTING, values, COLUMN_NAME_ID + " = ?", new String[] { String.valueOf(setting.getId()) });
     }

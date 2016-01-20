@@ -10,6 +10,8 @@ public class AppSetting {
     private String pname;
     private String pmac;
 
+    private int printerMaxChar;
+
     public AppSetting()
     {    }
 
@@ -17,8 +19,15 @@ public class AppSetting {
         this.setServer(server);
         this.setPname(pname);
         this.setPmac(pmac);
+        this.setPrinterMaxChar(38); //Default setting
     }
 
+    public AppSetting(String server, String pname, String pmac, int printMaxChar) {
+        this.setServer(server);
+        this.setPname(pname);
+        this.setPmac(pmac);
+        this.setPrinterMaxChar(printMaxChar);
+    }
 
     public int getId() {
         return id;
@@ -50,5 +59,13 @@ public class AppSetting {
 
     public void setPmac(String pmac) {
         this.pmac = pmac;
+    }
+
+    public int getPrinterMaxChar() {
+        return printerMaxChar;
+    }
+
+    public void setPrinterMaxChar(int printerMaxChar) {
+        this.printerMaxChar = printerMaxChar;
     }
 }

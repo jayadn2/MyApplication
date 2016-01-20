@@ -73,6 +73,26 @@ public class AppSettingsActivity extends DialogFragment {
                             AppSetting setting = new AppSetting(paramsArray[2], paramsArray[0], paramsArray[1]);
                             appSettingsDbHelper.createAppSetting(setting);
                         }
+                        else if(paramsArray.length == 4) //ex = BTP-B00955""http://www.simpfo.in/siti/"32
+                        {
+                            // Getting all Todos
+                            Log.d("Get AppSetting", "Getting All AppSettings");
+
+                            List<AppSetting> allToDos = appSettingsDbHelper.getAllAppSettings();
+                            //There should be only one setting for the application at any time.
+                            if(allToDos.size() > 0)
+                            {
+                                //Delete all the existing entries before inserting new one.
+                                for(int i = 0 ;i <allToDos.size();i++) {
+                                    AppSetting setting = allToDos.get(i);
+                                    if (setting != null)
+                                        appSettingsDbHelper.deleteAppSetting(setting.getId());
+                                }
+                            }
+                            int printerWidth = Integer.valueOf(paramsArray[3]);
+                            AppSetting setting = new AppSetting(paramsArray[2], paramsArray[0], paramsArray[1], printerWidth);
+                            appSettingsDbHelper.createAppSetting(setting);
+                        }
                     }
                 });
         FindAllViewsById();
