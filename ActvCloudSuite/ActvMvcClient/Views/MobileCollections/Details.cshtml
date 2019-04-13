@@ -1,0 +1,74 @@
+﻿@model ActvMvcClient.Models.MobileCollection
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MobileCollection</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RecieptNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecieptNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GpsLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GpsLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LedgerUpdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LedgerUpdated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

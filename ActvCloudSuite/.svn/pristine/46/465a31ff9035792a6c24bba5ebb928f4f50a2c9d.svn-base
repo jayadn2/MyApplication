@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ActvMvcClient.Models.MobileCollectionExt>
+
+<table>
+    <tr>
+        <th>
+            Emp Id
+        </th>
+        <th>
+            Employee Name
+        </th>
+        <th>
+            Customer Id
+        </th>
+        <th>
+            RecieptNo
+        </th>
+        <th>
+            Amount
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpTable.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecieptNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+        </tr>
+    }
+
+</table>

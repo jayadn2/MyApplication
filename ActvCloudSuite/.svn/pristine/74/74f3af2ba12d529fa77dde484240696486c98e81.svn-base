@@ -1,0 +1,74 @@
+﻿http://localhost:65394/token
+Request Type: Post
+Header:
+User-Agent: Fiddler
+Host: localhost:65394
+Content-Length: 72
+
+Body:
+username=amF5YQ==&password=YXNk&grant_type=password&mac=QXBpUmVxdWVzdEtleQ==
+(username, password, mac are base64 encoded)
+--------------------------
+Successful response will returen token (in body), ed (in header), ed is emp id and it is base64 encoded.
+ex:
+ed: MjA=
+access_token=_88_g9QfvwoIwa_6uFMayAC4_FEJ5pSrUlYGwPxSxkyjybQtMvAurzdzgxIHxOXgMahtKsfZsx8NvLYoI-mHmu5CmxK7h_JaKuXIvXNUdIV6_CZe2o1A5KV4_e9wZz4Tz2lygtHcBr1xGutMeVqj9mf2VZjljId3LlMt2_W8mytwH3keFSboviWtShV0Ehf69ss3GpLgWqGmr55O0DUtLUia30dxSMigoNDBLByVonU
+---------------------
+Next calls should send the token along with the request as follows:
+
+http://localhost:65394/api/orders
+Request Type: Get
+
+Header:
+User-Agent: Fiddler
+Host: localhost:65394
+Content-Length: 72
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer _88_g9QfvwoIwa_6uFMayAC4_FEJ5pSrUlYGwPxSxkyjybQtMvAurzdzgxIHxOXgMahtKsfZsx8NvLYoI-mHmu5CmxK7h_JaKuXIvXNUdIV6_CZe2o1A5KV4_e9wZz4Tz2lygtHcBr1xGutMeVqj9mf2VZjljId3LlMt2_W8mytwH3keFSboviWtShV0Ehf69ss3GpLgWqGmr55O0DUtLUia30dxSMigoNDBLByVonU
+--------------------
+Post request date format in body should be in current system date format
+
+http://localhost:65394/api/CustomerBalanceDetails
+
+RequestType: Post
+
+User-Agent: Fiddler
+Accept: application/json
+Content-Type: application/json
+Host: localhost:65394
+Content-Length: 265
+Authorization: Bearer fsOEWzW-_BLuqXHpMIzziko1uJ-lSD7wsx3Xn28wL4zq0D26L9PbNVhMem6i2SnIWTIng6tmtF4EdMZCnlZ2T3gD_RoT87GHpAa99tv_lLRKOrMBF2gORRe5N72mriHb1-NO9RPzkokTnWvop4_d5drKorimETJugqpuuOYtDr-B0xCsu3KSy83NnAml4Um6lc9iOzpDN-5mRsl0tPtT5fUNjc0Jh4cEEL77Ury9YcU
+
+{
+"CustId":5308,
+"CustName":"VIJAY(AUTO)",
+"Adress":"-SOMAGUDDU ROAD(ISTRI) 28-4-2010",
+"LastPaidAmt":0,
+"LastPaidDate":"0001-01-01T00:00:00",
+"TotalBalance":475,
+"CurrentPayment":100,
+"CurrentPaymentDate":"5/10/2015",
+"EmpId":12,
+"GpsLocation":"adugodi"
+}
+------------------
+
+http://localhost/ActvWebApi/api/MobileCollectionRequestModels
+User-Agent: Fiddler
+Host: localhost
+Content-Length: 150
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer pzXHScmjAYJ7IVeS_psOj_uePsAA2TCvYo7aDnZjT-vnsHL5YdCfzVYg7RQyqs0UezVKHAKr7vWZoSGiAWegaRJ3_YgGcBJ4z-E9nMK8U6HJayzeWrTyXV72YgGFM1dkSkMgaqhOyRjSOVbiuUGQ6cSGOmJqmFl3NzyVtS2X42THUHOucYigZRCsxvfv3wo0tLTpW-wIvB2VmjlvXb_pGarXxbu1btT2P8ZCYjYybvY
+
+Post:
+{
+"ID":0,
+"FromDate":"1/7/2015",
+"ToDate":"2/7/2015",
+"EmpId":"12",
+"SearchOnBillNumber":false,
+"StartBillNumber":"12",
+"EndBillNumber":"12"
+}

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ActvMvcClient.Models.MobileCollectionExt>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/css/smoothness/jquery-ui-1.9.0.custom.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<script src="~/Scripts/jsrender.js"></script>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <div class="form-group">
+        @Html.Label("EmpId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("EmpId", null, htmlAttributes: new { @class = "form-control", @id= "EmpId" })
+            @Html.ValidationMessage("", new { @class = "text-danger" })
+        </div>
+    </div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RecieptNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CollectionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpTable.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GpsLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LedgerUpdated)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecieptNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CollectionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpTable.EmployeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GpsLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LedgerUpdated)
+        </td>        
+    </tr>
+}
+
+</table>
+
+<script>
+    $(document).ready(
+        function () {
+
+            $('select[name="EmpId"]').change(function () {
+                @*$.ajax({
+                    url: '@Url.Action("Index", "MobileCollections")',
+                    type: 'GET',
+                    dataType: 'json',
+                    cache: false,
+                    data: { 'id': $('select[name="EmpId"]').val() },
+                    success: function (results) {
+                        alert(results)
+                    },
+                    //error: function () {
+                    //    alert('Error occured' + $('select[name="EmpId"]').val());
+                    //}
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //some errror, some show err msg to user and log the error
+                        alert(xhr.responseText);
+
+                    }
+                });*@
+                $.get(
+    "@Url.Action("Index", "MobileCollections", { Id: @item.Id})"
+            });
+
+
+        }
+        );
+</script>

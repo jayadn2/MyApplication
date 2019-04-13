@@ -1,0 +1,12 @@
+﻿Update the following tables while deploying:
+TableName: MobileInfoes
+Changes: Added foreign key to EmpId
+
+TableName: AmountCollection
+Changes: Added foreign key to EmpId
+Added foreign key to CustomerID
+
+TableName: CustomerDetailsTable
+Changes: Removed Combinationational Primary key of (CustomerCode , AgentCode)
+		 Added Unique Key of (CustomerCode , AgentCode)
+		 Added Primary Key for Id

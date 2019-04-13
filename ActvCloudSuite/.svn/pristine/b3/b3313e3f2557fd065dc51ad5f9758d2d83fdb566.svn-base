@@ -1,0 +1,3 @@
+<add name="DefaultConnection" connectionString="data source=.\SQLEXPRESS;initial catalog=ACTV.NET_DB;Integrated Security=false;user id=jayadn;password=Welcome123#"
+
+<add name="DefaultConnection" connectionString="data source=67.225.148.206, 14336;initial catalog=ACTVNET_DB;Integrated Security=false;user id=jayadn;password=Welcome123#" providerName="System.Data.SqlClient" />

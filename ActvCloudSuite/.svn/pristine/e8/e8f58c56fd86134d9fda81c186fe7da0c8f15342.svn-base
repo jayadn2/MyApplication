@@ -1,0 +1,49 @@
+﻿@model  IEnumerable <ActvMvcClient.Models.CompanyTable>
+
+
+@{
+    ViewBag.Title = "Update Balance";
+}
+
+<link href="~/css/smoothness/jquery-ui-1.9.0.custom.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<script src="~/Scripts/jsrender.js"></script>
+
+<br />
+@using (Html.BeginForm("Update", "BalanceUpdate", FormMethod.Post))
+{
+
+    <fieldset>
+        <h1>Update Balance For </h1> @Html.DropDownList("Company", null, htmlAttributes: new { @class = "form-control" })
+        <p>
+            <input type="submit" value="Submit" id="submitButton" />
+
+        </p>
+    </fieldset>
+
+
+        
+        <h2 id="progress"></h2>
+        
+}
+
+        <script>
+            $(document).ready(
+            function () {
+                $("#submitButton").click(
+                    function (e) {
+                        setInterval(
+                            function () {
+                                var url = '@Url.Action("UpdateProgress", "BalanceUpdate")';
+                                //$.get("/ActvMvcClient/BalanceUpdate/UpdateProgress",
+                                $.get(url,
+                                    function (json) {
+                                        $("#progress").html('Updating...' + json.Progress + '%');
+
+                                    });
+                            }, 300);
+                    });
+            });
+        </script>
+

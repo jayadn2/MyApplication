@@ -1,0 +1,1002 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ACTV.NET_DB.MDFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACTVTransact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactId" Type="int" Nullable="false" />
+          <Property Name="ReceiptNo" Type="int" Nullable="false" />
+          <Property Name="AccountNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CollectionAmount" Type="int" Nullable="false" />
+          <Property Name="CollectionDate" Type="datetime" Nullable="false" />
+          <Property Name="InstalmentAmount" Type="int" Nullable="false" />
+          <Property Name="Cancel" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="AgentCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CollectionTime" Type="varchar" MaxLength="50" />
+          <Property Name="LedgerUpdated" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgentDetailsTable">
+          <Key>
+            <PropertyRef Name="AgentCode" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AreaCode" Type="int" Nullable="false" />
+          <Property Name="EmpNum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AmountCollectionTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="AgentCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CollectionAmount" Type="int" Nullable="false" />
+          <Property Name="BillNum" Type="int" Nullable="false" />
+          <Property Name="BillBookNum" Type="int" />
+          <Property Name="CollectionDate" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CollectionSource" Type="varchar" MaxLength="10" />
+          <Property Name="CollectionDate2" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AreaDetailsTable">
+          <Key>
+            <PropertyRef Name="AreaCode" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AreaCode" Type="int" Nullable="false" />
+          <Property Name="AreaName" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="BillingCategoryTable">
+          <Key>
+            <PropertyRef Name="CategoryCode" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Frequency" Type="int" Nullable="false" />
+          <Property Name="OldID" Type="int" Nullable="false" />
+          <Property Name="BillingPlan" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="CompanyTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FinancialYear" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartMonth" Type="int" Nullable="false" />
+          <Property Name="EndMonth" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerDetailsTable">
+          <Key>
+            <PropertyRef Name="CustomerCode" />
+            <PropertyRef Name="AreaCode" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerCode" Type="int" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AgentCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AreaCode" Type="int" Nullable="false" />
+          <Property Name="BillingCategory" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MobileNum" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConnectionDate" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="InitialBalance" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LedgerTable">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustID" Type="int" Nullable="false" />
+          <Property Name="CustCode" Type="int" Nullable="false" />
+          <Property Name="AreaCode" Type="int" Nullable="false" />
+          <Property Name="AgentCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OldBalance" Type="int" Nullable="false" />
+          <Property Name="NumOfMonthsBal" Type="int" Nullable="false" />
+          <Property Name="TotalBalance" Type="int" Nullable="false" />
+          <Property Name="TotalAmtPaid" Type="int" Nullable="false" />
+          <Property Name="Bill_1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_2" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_4" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_5" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_6" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_7" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_8" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_9" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_10" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_11" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_12" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amt_1" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_2" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_3" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_4" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_5" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_6" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_7" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_8" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_9" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_10" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_11" Type="nchar" MaxLength="100" />
+          <Property Name="Amt_12" Type="nchar" MaxLength="100" />
+          <Property Name="Date_1" Type="nchar" MaxLength="100" />
+          <Property Name="Date_2" Type="nchar" MaxLength="100" />
+          <Property Name="Date_3" Type="nchar" MaxLength="100" />
+          <Property Name="Date_4" Type="nchar" MaxLength="100" />
+          <Property Name="Date_5" Type="nchar" MaxLength="100" />
+          <Property Name="Date_6" Type="nchar" MaxLength="100" />
+          <Property Name="Date_7" Type="nchar" MaxLength="100" />
+          <Property Name="Date_8" Type="nchar" MaxLength="100" />
+          <Property Name="Date_9" Type="nchar" MaxLength="100" />
+          <Property Name="Date_10" Type="nchar" MaxLength="100" />
+          <Property Name="Date_11" Type="nchar" MaxLength="100" />
+          <Property Name="Date_12" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_1" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_2" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_3" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_4" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_5" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_6" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_7" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_8" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_9" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_10" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_11" Type="nchar" MaxLength="100" />
+          <Property Name="Bal_12" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="login_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="usertype" Type="varchar" MaxLength="50" />
+          <Property Name="empid" Type="int" />
+        </EntityType>
+        <EntityType Name="MobileCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecieptNo" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="CollectionDate" Type="date" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="GpsLocation" Type="varchar" MaxLength="50" />
+          <Property Name="LedgerUpdated" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MobileInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MacId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AmountCol__Agent__73A521EA">
+          <End Role="AgentDetailsTable" Type="Self.AgentDetailsTable" Multiplicity="1" />
+          <End Role="AmountCollectionTable" Type="Self.AmountCollectionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentDetailsTable">
+              <PropertyRef Name="AgentCode" />
+            </Principal>
+            <Dependent Role="AmountCollectionTable">
+              <PropertyRef Name="AgentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgentDetailsTable_AgentDetailsTable">
+          <End Role="AreaDetailsTable" Type="Self.AreaDetailsTable" Multiplicity="1" />
+          <End Role="AgentDetailsTable" Type="Self.AgentDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaDetailsTable">
+              <PropertyRef Name="AreaCode" />
+            </Principal>
+            <Dependent Role="AgentDetailsTable">
+              <PropertyRef Name="AreaCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgentDetailsTable_EmployeeTable">
+          <End Role="EmployeeTable" Type="Self.EmployeeTable" Multiplicity="1" />
+          <End Role="AgentDetailsTable" Type="Self.AgentDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeTable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AgentDetailsTable">
+              <PropertyRef Name="EmpNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_AmountCollectionTable_CustomerDetailsTable' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_AmountCollectionTable_CustomerDetailsTable" />-->
+        <Association Name="FK_AmountCollectionTable_EmployeeTable">
+          <End Role="EmployeeTable" Type="Self.EmployeeTable" Multiplicity="1" />
+          <End Role="AmountCollectionTable" Type="Self.AmountCollectionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeTable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AmountCollectionTable">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDetailsTable_AgentDetailsTable">
+          <End Role="AgentDetailsTable" Type="Self.AgentDetailsTable" Multiplicity="1" />
+          <End Role="CustomerDetailsTable" Type="Self.CustomerDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentDetailsTable">
+              <PropertyRef Name="AgentCode" />
+            </Principal>
+            <Dependent Role="CustomerDetailsTable">
+              <PropertyRef Name="AgentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDetailsTable_AreaDetailsTable">
+          <End Role="AreaDetailsTable" Type="Self.AreaDetailsTable" Multiplicity="1" />
+          <End Role="CustomerDetailsTable" Type="Self.CustomerDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaDetailsTable">
+              <PropertyRef Name="AreaCode" />
+            </Principal>
+            <Dependent Role="CustomerDetailsTable">
+              <PropertyRef Name="AreaCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDetailsTable_BillingCategoryTable">
+          <End Role="BillingCategoryTable" Type="Self.BillingCategoryTable" Multiplicity="1" />
+          <End Role="CustomerDetailsTable" Type="Self.CustomerDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillingCategoryTable">
+              <PropertyRef Name="CategoryCode" />
+            </Principal>
+            <Dependent Role="CustomerDetailsTable">
+              <PropertyRef Name="BillingCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LedgerTable_AgentDetailsTable">
+          <End Role="AgentDetailsTable" Type="Self.AgentDetailsTable" Multiplicity="1" />
+          <End Role="LedgerTable" Type="Self.LedgerTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentDetailsTable">
+              <PropertyRef Name="AgentCode" />
+            </Principal>
+            <Dependent Role="LedgerTable">
+              <PropertyRef Name="AgentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LedgerTable_AreaDetailsTable">
+          <End Role="AreaDetailsTable" Type="Self.AreaDetailsTable" Multiplicity="1" />
+          <End Role="LedgerTable" Type="Self.LedgerTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaDetailsTable">
+              <PropertyRef Name="AreaCode" />
+            </Principal>
+            <Dependent Role="LedgerTable">
+              <PropertyRef Name="AreaCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_LedgerTable_CustomerDetailsTable' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_LedgerTable_CustomerDetailsTable" />-->
+        <Association Name="FK_MobileInfo_EmployeeTable">
+          <End Role="EmployeeTable" Type="Self.EmployeeTable" Multiplicity="1" />
+          <End Role="MobileInfo" Type="Self.MobileInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeTable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MobileInfo">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ACTVNET_DBMDFModelStoreContainer">
+          <EntitySet Name="ACTVTransact" EntityType="Self.ACTVTransact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgentDetailsTable" EntityType="Self.AgentDetailsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AmountCollectionTable" EntityType="Self.AmountCollectionTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AreaDetailsTable" EntityType="Self.AreaDetailsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BillingCategoryTable" EntityType="Self.BillingCategoryTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyTable" EntityType="Self.CompanyTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerDetailsTable" EntityType="Self.CustomerDetailsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeTable" EntityType="Self.EmployeeTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LedgerTable" EntityType="Self.LedgerTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="login_info" EntityType="Self.login_info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobileCollection" EntityType="Self.MobileCollection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobileInfo" EntityType="Self.MobileInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AmountCol__Agent__73A521EA" Association="Self.FK__AmountCol__Agent__73A521EA">
+            <End Role="AgentDetailsTable" EntitySet="AgentDetailsTable" />
+            <End Role="AmountCollectionTable" EntitySet="AmountCollectionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgentDetailsTable_AgentDetailsTable" Association="Self.FK_AgentDetailsTable_AgentDetailsTable">
+            <End Role="AreaDetailsTable" EntitySet="AreaDetailsTable" />
+            <End Role="AgentDetailsTable" EntitySet="AgentDetailsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgentDetailsTable_EmployeeTable" Association="Self.FK_AgentDetailsTable_EmployeeTable">
+            <End Role="EmployeeTable" EntitySet="EmployeeTable" />
+            <End Role="AgentDetailsTable" EntitySet="AgentDetailsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AmountCollectionTable_EmployeeTable" Association="Self.FK_AmountCollectionTable_EmployeeTable">
+            <End Role="EmployeeTable" EntitySet="EmployeeTable" />
+            <End Role="AmountCollectionTable" EntitySet="AmountCollectionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDetailsTable_AgentDetailsTable" Association="Self.FK_CustomerDetailsTable_AgentDetailsTable">
+            <End Role="AgentDetailsTable" EntitySet="AgentDetailsTable" />
+            <End Role="CustomerDetailsTable" EntitySet="CustomerDetailsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDetailsTable_AreaDetailsTable" Association="Self.FK_CustomerDetailsTable_AreaDetailsTable">
+            <End Role="AreaDetailsTable" EntitySet="AreaDetailsTable" />
+            <End Role="CustomerDetailsTable" EntitySet="CustomerDetailsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDetailsTable_BillingCategoryTable" Association="Self.FK_CustomerDetailsTable_BillingCategoryTable">
+            <End Role="BillingCategoryTable" EntitySet="BillingCategoryTable" />
+            <End Role="CustomerDetailsTable" EntitySet="CustomerDetailsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LedgerTable_AgentDetailsTable" Association="Self.FK_LedgerTable_AgentDetailsTable">
+            <End Role="AgentDetailsTable" EntitySet="AgentDetailsTable" />
+            <End Role="LedgerTable" EntitySet="LedgerTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LedgerTable_AreaDetailsTable" Association="Self.FK_LedgerTable_AreaDetailsTable">
+            <End Role="AreaDetailsTable" EntitySet="AreaDetailsTable" />
+            <End Role="LedgerTable" EntitySet="LedgerTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MobileInfo_EmployeeTable" Association="Self.FK_MobileInfo_EmployeeTable">
+            <End Role="EmployeeTable" EntitySet="EmployeeTable" />
+            <End Role="MobileInfo" EntitySet="MobileInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ACTV.NET_DB.MDFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EmployeeTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AgentDetailsTables" Relationship="ACTV.NET_DB.MDFModel.FK_AgentDetailsTable_EmployeeTable" FromRole="EmployeeTable" ToRole="AgentDetailsTable" />
+          <NavigationProperty Name="MobileInfoes" Relationship="ACTV.NET_DB.MDFModel.FK_MobileInfo_EmployeeTable" FromRole="EmployeeTable" ToRole="MobileInfo" />
+          <NavigationProperty Name="AmountCollectionTables" Relationship="ACTV.NET_DB.MDFModel.FK_AmountCollectionTable_EmployeeTable" FromRole="EmployeeTable" ToRole="AmountCollectionTable" />
+        </EntityType>
+        <EntityType Name="login_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usertype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="empid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MobileCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecieptNo" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="CollectionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="GpsLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LedgerUpdated" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MobileInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MacId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EmployeeTable" Relationship="ACTV.NET_DB.MDFModel.FK_MobileInfo_EmployeeTable" FromRole="MobileInfo" ToRole="EmployeeTable" />
+        </EntityType>
+        <EntityContainer Name="ActvEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EmployeeTables" EntityType="Self.EmployeeTable" />
+          <EntitySet Name="login_info" EntityType="Self.login_info" />
+          <EntitySet Name="MobileCollections" EntityType="Self.MobileCollection" />
+          <EntitySet Name="MobileInfoes" EntityType="Self.MobileInfo" />
+          <EntitySet Name="ACTVTransacts" EntityType="ACTV.NET_DB.MDFModel.ACTVTransact" />
+          <EntitySet Name="AgentDetailsTables" EntityType="ACTV.NET_DB.MDFModel.AgentDetailsTable" />
+          <EntitySet Name="AreaDetailsTables" EntityType="ACTV.NET_DB.MDFModel.AreaDetailsTable" />
+          <AssociationSet Name="FK_AgentDetailsTable_AgentDetailsTable" Association="ACTV.NET_DB.MDFModel.FK_AgentDetailsTable_AgentDetailsTable">
+            <End Role="AreaDetailsTable" EntitySet="AreaDetailsTables" />
+            <End Role="AgentDetailsTable" EntitySet="AgentDetailsTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgentDetailsTable_EmployeeTable" Association="ACTV.NET_DB.MDFModel.FK_AgentDetailsTable_EmployeeTable">
+            <End Role="EmployeeTable" EntitySet="EmployeeTables" />
+            <End Role="AgentDetailsTable" EntitySet="AgentDetailsTables" />
+          </AssociationSet>
+          <EntitySet Name="LedgerTables" EntityType="ACTV.NET_DB.MDFModel.LedgerTable" />
+          <AssociationSet Name="FK_LedgerTable_AgentDetailsTable" Association="ACTV.NET_DB.MDFModel.FK_LedgerTable_AgentDetailsTable">
+            <End Role="AgentDetailsTable" EntitySet="AgentDetailsTables" />
+            <End Role="LedgerTable" EntitySet="LedgerTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LedgerTable_AreaDetailsTable" Association="ACTV.NET_DB.MDFModel.FK_LedgerTable_AreaDetailsTable">
+            <End Role="AreaDetailsTable" EntitySet="AreaDetailsTables" />
+            <End Role="LedgerTable" EntitySet="LedgerTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MobileInfo_EmployeeTable" Association="ACTV.NET_DB.MDFModel.FK_MobileInfo_EmployeeTable">
+            <End Role="EmployeeTable" EntitySet="EmployeeTables" />
+            <End Role="MobileInfo" EntitySet="MobileInfoes" />
+          </AssociationSet>
+          <EntitySet Name="CompanyTables" EntityType="ACTV.NET_DB.MDFModel.CompanyTable" />
+          <EntitySet Name="BillingCategoryTables" EntityType="ACTV.NET_DB.MDFModel.BillingCategoryTable" />
+          <EntitySet Name="CustomerDetailsTables" EntityType="ACTV.NET_DB.MDFModel.CustomerDetailsTable" />
+          <AssociationSet Name="FK_CustomerDetailsTable_AgentDetailsTable" Association="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_AgentDetailsTable">
+            <End Role="AgentDetailsTable" EntitySet="AgentDetailsTables" />
+            <End Role="CustomerDetailsTable" EntitySet="CustomerDetailsTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDetailsTable_AreaDetailsTable" Association="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_AreaDetailsTable">
+            <End Role="AreaDetailsTable" EntitySet="AreaDetailsTables" />
+            <End Role="CustomerDetailsTable" EntitySet="CustomerDetailsTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDetailsTable_BillingCategoryTable" Association="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_BillingCategoryTable">
+            <End Role="BillingCategoryTable" EntitySet="BillingCategoryTables" />
+            <End Role="CustomerDetailsTable" EntitySet="CustomerDetailsTables" />
+          </AssociationSet>
+          <EntitySet Name="AmountCollectionTables" EntityType="ACTV.NET_DB.MDFModel.AmountCollectionTable" />
+          <AssociationSet Name="FK__AmountCol__Agent__73A521EA" Association="ACTV.NET_DB.MDFModel.FK__AmountCol__Agent__73A521EA">
+            <End Role="AgentDetailsTable" EntitySet="AgentDetailsTables" />
+            <End Role="AmountCollectionTable" EntitySet="AmountCollectionTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AmountCollectionTable_EmployeeTable" Association="ACTV.NET_DB.MDFModel.FK_AmountCollectionTable_EmployeeTable">
+            <End Role="EmployeeTable" EntitySet="EmployeeTables" />
+            <End Role="AmountCollectionTable" EntitySet="AmountCollectionTables" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ACTVTransact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactId" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptNo" Type="Int32" Nullable="false" />
+          <Property Name="AccountNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CollectionAmount" Type="Int32" Nullable="false" />
+          <Property Name="CollectionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InstalmentAmount" Type="Int32" Nullable="false" />
+          <Property Name="Cancel" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="AgentCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CollectionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LedgerUpdated" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AgentDetailsTable">
+          <Key>
+            <PropertyRef Name="AgentCode" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AreaCode" Type="Int32" Nullable="false" />
+          <Property Name="EmpNum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AreaDetailsTable" Relationship="ACTV.NET_DB.MDFModel.FK_AgentDetailsTable_AgentDetailsTable" FromRole="AgentDetailsTable" ToRole="AreaDetailsTable" />
+          <NavigationProperty Name="EmployeeTable" Relationship="ACTV.NET_DB.MDFModel.FK_AgentDetailsTable_EmployeeTable" FromRole="AgentDetailsTable" ToRole="EmployeeTable" />
+          <NavigationProperty Name="LedgerTables" Relationship="ACTV.NET_DB.MDFModel.FK_LedgerTable_AgentDetailsTable" FromRole="AgentDetailsTable" ToRole="LedgerTable" />
+          <NavigationProperty Name="CustomerDetailsTables" Relationship="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_AgentDetailsTable" FromRole="AgentDetailsTable" ToRole="CustomerDetailsTable" />
+          <NavigationProperty Name="AmountCollectionTables" Relationship="ACTV.NET_DB.MDFModel.FK__AmountCol__Agent__73A521EA" FromRole="AgentDetailsTable" ToRole="AmountCollectionTable" />
+        </EntityType>
+        <EntityType Name="AreaDetailsTable">
+          <Key>
+            <PropertyRef Name="AreaCode" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AreaCode" Type="Int32" Nullable="false" />
+          <Property Name="AreaName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AgentDetailsTables" Relationship="ACTV.NET_DB.MDFModel.FK_AgentDetailsTable_AgentDetailsTable" FromRole="AreaDetailsTable" ToRole="AgentDetailsTable" />
+          <NavigationProperty Name="LedgerTables" Relationship="ACTV.NET_DB.MDFModel.FK_LedgerTable_AreaDetailsTable" FromRole="AreaDetailsTable" ToRole="LedgerTable" />
+          <NavigationProperty Name="CustomerDetailsTables" Relationship="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_AreaDetailsTable" FromRole="AreaDetailsTable" ToRole="CustomerDetailsTable" />
+        </EntityType>
+        <Association Name="FK_AgentDetailsTable_AgentDetailsTable">
+          <End Type="ACTV.NET_DB.MDFModel.AreaDetailsTable" Role="AreaDetailsTable" Multiplicity="1" />
+          <End Type="ACTV.NET_DB.MDFModel.AgentDetailsTable" Role="AgentDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaDetailsTable">
+              <PropertyRef Name="AreaCode" />
+            </Principal>
+            <Dependent Role="AgentDetailsTable">
+              <PropertyRef Name="AreaCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgentDetailsTable_EmployeeTable">
+          <End Type="ACTV.NET_DB.MDFModel.EmployeeTable" Role="EmployeeTable" Multiplicity="1" />
+          <End Type="ACTV.NET_DB.MDFModel.AgentDetailsTable" Role="AgentDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeTable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AgentDetailsTable">
+              <PropertyRef Name="EmpNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LedgerTable">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustID" Type="Int32" Nullable="false" />
+          <Property Name="CustCode" Type="Int32" Nullable="false" />
+          <Property Name="AreaCode" Type="Int32" Nullable="false" />
+          <Property Name="AgentCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OldBalance" Type="Int32" Nullable="false" />
+          <Property Name="NumOfMonthsBal" Type="Int32" Nullable="false" />
+          <Property Name="TotalBalance" Type="Int32" Nullable="false" />
+          <Property Name="TotalAmtPaid" Type="Int32" Nullable="false" />
+          <Property Name="Bill_1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_3" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_4" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_5" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_6" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_7" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_8" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_9" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_10" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_11" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bill_12" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amt_1" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_2" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_3" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_4" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_5" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_6" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_7" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_8" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_9" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_10" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_11" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Amt_12" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_1" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_2" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_3" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_4" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_5" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_6" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_7" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_8" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_9" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_10" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_11" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Date_12" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_1" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_2" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_3" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_4" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_5" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_6" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_7" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_8" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_9" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_10" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_11" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Bal_12" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AgentDetailsTable" Relationship="ACTV.NET_DB.MDFModel.FK_LedgerTable_AgentDetailsTable" FromRole="LedgerTable" ToRole="AgentDetailsTable" />
+          <NavigationProperty Name="AreaDetailsTable" Relationship="ACTV.NET_DB.MDFModel.FK_LedgerTable_AreaDetailsTable" FromRole="LedgerTable" ToRole="AreaDetailsTable" />
+        </EntityType>
+        <Association Name="FK_LedgerTable_AgentDetailsTable">
+          <End Type="ACTV.NET_DB.MDFModel.AgentDetailsTable" Role="AgentDetailsTable" Multiplicity="1" />
+          <End Type="ACTV.NET_DB.MDFModel.LedgerTable" Role="LedgerTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentDetailsTable">
+              <PropertyRef Name="AgentCode" />
+            </Principal>
+            <Dependent Role="LedgerTable">
+              <PropertyRef Name="AgentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LedgerTable_AreaDetailsTable">
+          <End Type="ACTV.NET_DB.MDFModel.AreaDetailsTable" Role="AreaDetailsTable" Multiplicity="1" />
+          <End Type="ACTV.NET_DB.MDFModel.LedgerTable" Role="LedgerTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaDetailsTable">
+              <PropertyRef Name="AreaCode" />
+            </Principal>
+            <Dependent Role="LedgerTable">
+              <PropertyRef Name="AreaCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MobileInfo_EmployeeTable">
+          <End Type="ACTV.NET_DB.MDFModel.EmployeeTable" Role="EmployeeTable" Multiplicity="1" />
+          <End Type="ACTV.NET_DB.MDFModel.MobileInfo" Role="MobileInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeTable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MobileInfo">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CompanyTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FinancialYear" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartMonth" Type="Int32" Nullable="false" />
+          <Property Name="EndMonth" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BillingCategoryTable">
+          <Key>
+            <PropertyRef Name="CategoryCode" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Frequency" Type="Int32" Nullable="false" />
+          <Property Name="OldID" Type="Int32" Nullable="false" />
+          <Property Name="BillingPlan" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerDetailsTables" Relationship="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_BillingCategoryTable" FromRole="BillingCategoryTable" ToRole="CustomerDetailsTable" />
+        </EntityType>
+        <EntityType Name="CustomerDetailsTable">
+          <Key>
+            <PropertyRef Name="CustomerCode" />
+            <PropertyRef Name="AreaCode" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerCode" Type="Int32" Nullable="false" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AgentCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AreaCode" Type="Int32" Nullable="false" />
+          <Property Name="BillingCategory" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConnectionDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InitialBalance" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Comments" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AgentDetailsTable" Relationship="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_AgentDetailsTable" FromRole="CustomerDetailsTable" ToRole="AgentDetailsTable" />
+          <NavigationProperty Name="AreaDetailsTable" Relationship="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_AreaDetailsTable" FromRole="CustomerDetailsTable" ToRole="AreaDetailsTable" />
+          <NavigationProperty Name="BillingCategoryTable" Relationship="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_BillingCategoryTable" FromRole="CustomerDetailsTable" ToRole="BillingCategoryTable" />
+        </EntityType>
+        <Association Name="FK_CustomerDetailsTable_AgentDetailsTable">
+          <End Type="ACTV.NET_DB.MDFModel.AgentDetailsTable" Role="AgentDetailsTable" Multiplicity="1" />
+          <End Type="ACTV.NET_DB.MDFModel.CustomerDetailsTable" Role="CustomerDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentDetailsTable">
+              <PropertyRef Name="AgentCode" />
+            </Principal>
+            <Dependent Role="CustomerDetailsTable">
+              <PropertyRef Name="AgentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDetailsTable_AreaDetailsTable">
+          <End Type="ACTV.NET_DB.MDFModel.AreaDetailsTable" Role="AreaDetailsTable" Multiplicity="1" />
+          <End Type="ACTV.NET_DB.MDFModel.CustomerDetailsTable" Role="CustomerDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaDetailsTable">
+              <PropertyRef Name="AreaCode" />
+            </Principal>
+            <Dependent Role="CustomerDetailsTable">
+              <PropertyRef Name="AreaCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDetailsTable_BillingCategoryTable">
+          <End Type="ACTV.NET_DB.MDFModel.BillingCategoryTable" Role="BillingCategoryTable" Multiplicity="1" />
+          <End Type="ACTV.NET_DB.MDFModel.CustomerDetailsTable" Role="CustomerDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillingCategoryTable">
+              <PropertyRef Name="CategoryCode" />
+            </Principal>
+            <Dependent Role="CustomerDetailsTable">
+              <PropertyRef Name="BillingCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AmountCollectionTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="AgentCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="CollectionAmount" Type="Int32" Nullable="false" />
+          <Property Name="BillNum" Type="Int32" Nullable="false" />
+          <Property Name="BillBookNum" Type="Int32" />
+          <Property Name="CollectionDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CollectionSource" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CollectionDate2" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AgentDetailsTable" Relationship="ACTV.NET_DB.MDFModel.FK__AmountCol__Agent__73A521EA" FromRole="AmountCollectionTable" ToRole="AgentDetailsTable" />
+          <NavigationProperty Name="EmployeeTable" Relationship="ACTV.NET_DB.MDFModel.FK_AmountCollectionTable_EmployeeTable" FromRole="AmountCollectionTable" ToRole="EmployeeTable" />
+        </EntityType>
+        <Association Name="FK__AmountCol__Agent__73A521EA">
+          <End Type="ACTV.NET_DB.MDFModel.AgentDetailsTable" Role="AgentDetailsTable" Multiplicity="1" />
+          <End Type="ACTV.NET_DB.MDFModel.AmountCollectionTable" Role="AmountCollectionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentDetailsTable">
+              <PropertyRef Name="AgentCode" />
+            </Principal>
+            <Dependent Role="AmountCollectionTable">
+              <PropertyRef Name="AgentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AmountCollectionTable_EmployeeTable">
+          <End Type="ACTV.NET_DB.MDFModel.EmployeeTable" Role="EmployeeTable" Multiplicity="1" />
+          <End Type="ACTV.NET_DB.MDFModel.AmountCollectionTable" Role="AmountCollectionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeTable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AmountCollectionTable">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ACTVNET_DBMDFModelStoreContainer" CdmEntityContainer="ActvEntities">
+          <EntitySetMapping Name="EmployeeTables">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.EmployeeTable">
+              <MappingFragment StoreEntitySet="EmployeeTable">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="login_info">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.login_info">
+              <MappingFragment StoreEntitySet="login_info">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="usertype" ColumnName="usertype" />
+                <ScalarProperty Name="empid" ColumnName="empid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobileCollections">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.MobileCollection">
+              <MappingFragment StoreEntitySet="MobileCollection">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RecieptNo" ColumnName="RecieptNo" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="GpsLocation" ColumnName="GpsLocation" />
+                <ScalarProperty Name="LedgerUpdated" ColumnName="LedgerUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobileInfoes">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.MobileInfo">
+              <MappingFragment StoreEntitySet="MobileInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MacId" ColumnName="MacId" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACTVTransacts">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.ACTVTransact">
+              <MappingFragment StoreEntitySet="ACTVTransact">
+                <ScalarProperty Name="LedgerUpdated" ColumnName="LedgerUpdated" />
+                <ScalarProperty Name="CollectionTime" ColumnName="CollectionTime" />
+                <ScalarProperty Name="AgentCode" ColumnName="AgentCode" />
+                <ScalarProperty Name="Cancel" ColumnName="Cancel" />
+                <ScalarProperty Name="InstalmentAmount" ColumnName="InstalmentAmount" />
+                <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
+                <ScalarProperty Name="CollectionAmount" ColumnName="CollectionAmount" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="TransactId" ColumnName="TransactId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgentDetailsTables">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.AgentDetailsTable">
+              <MappingFragment StoreEntitySet="AgentDetailsTable">
+                <ScalarProperty Name="EmpNum" ColumnName="EmpNum" />
+                <ScalarProperty Name="AreaCode" ColumnName="AreaCode" />
+                <ScalarProperty Name="AgentCode" ColumnName="AgentCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AreaDetailsTables">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.AreaDetailsTable">
+              <MappingFragment StoreEntitySet="AreaDetailsTable">
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="AreaCode" ColumnName="AreaCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LedgerTables">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.LedgerTable">
+              <MappingFragment StoreEntitySet="LedgerTable">
+                <ScalarProperty Name="Bal_12" ColumnName="Bal_12" />
+                <ScalarProperty Name="Bal_11" ColumnName="Bal_11" />
+                <ScalarProperty Name="Bal_10" ColumnName="Bal_10" />
+                <ScalarProperty Name="Bal_9" ColumnName="Bal_9" />
+                <ScalarProperty Name="Bal_8" ColumnName="Bal_8" />
+                <ScalarProperty Name="Bal_7" ColumnName="Bal_7" />
+                <ScalarProperty Name="Bal_6" ColumnName="Bal_6" />
+                <ScalarProperty Name="Bal_5" ColumnName="Bal_5" />
+                <ScalarProperty Name="Bal_4" ColumnName="Bal_4" />
+                <ScalarProperty Name="Bal_3" ColumnName="Bal_3" />
+                <ScalarProperty Name="Bal_2" ColumnName="Bal_2" />
+                <ScalarProperty Name="Bal_1" ColumnName="Bal_1" />
+                <ScalarProperty Name="Date_12" ColumnName="Date_12" />
+                <ScalarProperty Name="Date_11" ColumnName="Date_11" />
+                <ScalarProperty Name="Date_10" ColumnName="Date_10" />
+                <ScalarProperty Name="Date_9" ColumnName="Date_9" />
+                <ScalarProperty Name="Date_8" ColumnName="Date_8" />
+                <ScalarProperty Name="Date_7" ColumnName="Date_7" />
+                <ScalarProperty Name="Date_6" ColumnName="Date_6" />
+                <ScalarProperty Name="Date_5" ColumnName="Date_5" />
+                <ScalarProperty Name="Date_4" ColumnName="Date_4" />
+                <ScalarProperty Name="Date_3" ColumnName="Date_3" />
+                <ScalarProperty Name="Date_2" ColumnName="Date_2" />
+                <ScalarProperty Name="Date_1" ColumnName="Date_1" />
+                <ScalarProperty Name="Amt_12" ColumnName="Amt_12" />
+                <ScalarProperty Name="Amt_11" ColumnName="Amt_11" />
+                <ScalarProperty Name="Amt_10" ColumnName="Amt_10" />
+                <ScalarProperty Name="Amt_9" ColumnName="Amt_9" />
+                <ScalarProperty Name="Amt_8" ColumnName="Amt_8" />
+                <ScalarProperty Name="Amt_7" ColumnName="Amt_7" />
+                <ScalarProperty Name="Amt_6" ColumnName="Amt_6" />
+                <ScalarProperty Name="Amt_5" ColumnName="Amt_5" />
+                <ScalarProperty Name="Amt_4" ColumnName="Amt_4" />
+                <ScalarProperty Name="Amt_3" ColumnName="Amt_3" />
+                <ScalarProperty Name="Amt_2" ColumnName="Amt_2" />
+                <ScalarProperty Name="Amt_1" ColumnName="Amt_1" />
+                <ScalarProperty Name="Bill_12" ColumnName="Bill_12" />
+                <ScalarProperty Name="Bill_11" ColumnName="Bill_11" />
+                <ScalarProperty Name="Bill_10" ColumnName="Bill_10" />
+                <ScalarProperty Name="Bill_9" ColumnName="Bill_9" />
+                <ScalarProperty Name="Bill_8" ColumnName="Bill_8" />
+                <ScalarProperty Name="Bill_7" ColumnName="Bill_7" />
+                <ScalarProperty Name="Bill_6" ColumnName="Bill_6" />
+                <ScalarProperty Name="Bill_5" ColumnName="Bill_5" />
+                <ScalarProperty Name="Bill_4" ColumnName="Bill_4" />
+                <ScalarProperty Name="Bill_3" ColumnName="Bill_3" />
+                <ScalarProperty Name="Bill_2" ColumnName="Bill_2" />
+                <ScalarProperty Name="Bill_1" ColumnName="Bill_1" />
+                <ScalarProperty Name="TotalAmtPaid" ColumnName="TotalAmtPaid" />
+                <ScalarProperty Name="TotalBalance" ColumnName="TotalBalance" />
+                <ScalarProperty Name="NumOfMonthsBal" ColumnName="NumOfMonthsBal" />
+                <ScalarProperty Name="OldBalance" ColumnName="OldBalance" />
+                <ScalarProperty Name="AgentCode" ColumnName="AgentCode" />
+                <ScalarProperty Name="AreaCode" ColumnName="AreaCode" />
+                <ScalarProperty Name="CustCode" ColumnName="CustCode" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyTables">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.CompanyTable">
+              <MappingFragment StoreEntitySet="CompanyTable">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="EndMonth" ColumnName="EndMonth" />
+                <ScalarProperty Name="StartMonth" ColumnName="StartMonth" />
+                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillingCategoryTables">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.BillingCategoryTable">
+              <MappingFragment StoreEntitySet="BillingCategoryTable">
+                <ScalarProperty Name="BillingPlan" ColumnName="BillingPlan" />
+                <ScalarProperty Name="OldID" ColumnName="OldID" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerDetailsTables">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.CustomerDetailsTable">
+              <MappingFragment StoreEntitySet="CustomerDetailsTable">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="InitialBalance" ColumnName="InitialBalance" />
+                <ScalarProperty Name="ConnectionDate" ColumnName="ConnectionDate" />
+                <ScalarProperty Name="MobileNum" ColumnName="MobileNum" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BillingCategory" ColumnName="BillingCategory" />
+                <ScalarProperty Name="AreaCode" ColumnName="AreaCode" />
+                <ScalarProperty Name="AgentCode" ColumnName="AgentCode" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AmountCollectionTables">
+            <EntityTypeMapping TypeName="ACTV.NET_DB.MDFModel.AmountCollectionTable">
+              <MappingFragment StoreEntitySet="AmountCollectionTable">
+                <ScalarProperty Name="CollectionDate2" ColumnName="CollectionDate2" />
+                <ScalarProperty Name="CollectionSource" ColumnName="CollectionSource" />
+                <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
+                <ScalarProperty Name="BillBookNum" ColumnName="BillBookNum" />
+                <ScalarProperty Name="BillNum" ColumnName="BillNum" />
+                <ScalarProperty Name="CollectionAmount" ColumnName="CollectionAmount" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="AgentCode" ColumnName="AgentCode" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

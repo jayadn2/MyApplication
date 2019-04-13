@@ -1,0 +1,25 @@
+﻿@model ActvMvcClient.Models.MobileCollection
+
+@{
+    ViewBag.Title = "Remove Duplicate Mobile Collection Entries";
+}
+
+<h2>Delete Duplicate Mobile Collection Entries</h2>
+<br />
+@using (Html.BeginForm("RemoveDuplicateMobileCollectionEntries", "MobileCollections", FormMethod.Post))
+{
+
+    <fieldset>
+        @Html.DropDownList("Company", null, htmlAttributes: new { @class = "form-control" })
+        <br />
+        <p>
+            <input type="submit" value="Delete Duplicates" id="submitButton" />
+
+        </p>
+    </fieldset>
+
+
+
+    <h2 id="progress"></h2>
+
+}

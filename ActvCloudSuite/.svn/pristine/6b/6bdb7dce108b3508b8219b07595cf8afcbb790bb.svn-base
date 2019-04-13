@@ -1,0 +1,33 @@
+Post
+http://localhost:26264/token
+
+Header
+
+User-Agent: Fiddler
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Host: localhost:26264
+Content-Length: 52
+
+body
+
+grant_type=password&username=anand&password=password&mac=1234
+
+Response
+
+access_token=f8jSPRZhEbSp6ZSRgexGUOHtHDBAOd0fshiN2KY3elmaKEH93fAqWAX9NMhuXXDr2jC5JunWmXdFLzqSndPt5WMN2NH427SnGG2_7rZMR3XQ1_MiAALc3v2m3MbQhPrPGbbCvtwIDwv4uaTOs8xCRrJ1V6U3VedZGDLtQ-QFec-3JrMRok7OcoXZ3CpW8UMIx-yLUmH8aHsGSkX-LuHPGbAGXcJU_p5s1HzXeCelaOLc05z8F3dD5o_ncNaPdlbcIFPmWUo0wlRyiibEx88O49SlJ0TQ4IbsuGNoUHo0fG7mywTEr197cQhl85ZrKQSkbfF8tg
+
+access_token=FYfN_oZP419KnaVKYse4inEVU2Th4Si27NMYxUo1Nk3SGFU3WylJJjl0Q1zSI1E-lrCFLEP7onnu-3LwB1ztwG8uGMqb9c8Ddq4_n6wYQavGlIOh77Xg4VrVxm_UJdXNIvhfjftuJvD5qT5O-E4BsA5gYMVcP7Fayv-4ayBVXpUdc5KKS0w5K5Vaf8XGQG2ee3u7Mfo9OC-m1yCpcT4B56AglfxKDlZHRJ6DMoMJnVhL3MK20od-FoLalN0tqiMoyx5mD-_xVx94TXP852cFpiDkHA3NRgRGeLjWZk3-Wr6Dxx1X9bo_Vx6cpm-9I3ntYDyFpg
+
+-----------------------
+Get
+http://localhost:26264/api/orders
+Header
+
+User-Agent: Fiddler
+Accept: application/json
+Content-Type: application/json
+Host: localhost:26264
+Content-Length: 52
+Authorization: Bearer FYfN_oZP419KnaVKYse4inEVU2Th4Si27NMYxUo1Nk3SGFU3WylJJjl0Q1zSI1E-lrCFLEP7onnu-3LwB1ztwG8uGMqb9c8Ddq4_n6wYQavGlIOh77Xg4VrVxm_UJdXNIvhfjftuJvD5qT5O-E4BsA5gYMVcP7Fayv-4ayBVXpUdc5KKS0w5K5Vaf8XGQG2ee3u7Mfo9OC-m1yCpcT4B56AglfxKDlZHRJ6DMoMJnVhL3MK20od-FoLalN0tqiMoyx5mD-_xVx94TXP852cFpiDkHA3NRgRGeLjWZk3-Wr6Dxx1X9bo_Vx6cpm-9I3ntYDyFpg
+

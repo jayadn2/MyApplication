@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aa930d380046401fbbced8211b652603" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.EmployeeTable" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.login_info" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.MobileCollection" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.MobileInfo" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.ACTVTransact" Width="1.5" PointX="8.25" PointY="5.75" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.AgentDetailsTable" Width="1.5" PointX="6" PointY="6.375" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.AreaDetailsTable" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="ACTV.NET_DB.MDFModel.FK_AgentDetailsTable_AgentDetailsTable" />
+        <AssociationConnector Association="ACTV.NET_DB.MDFModel.FK_AgentDetailsTable_EmployeeTable" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.LedgerTable" Width="1.5" PointX="11.25" PointY="0.75" />
+        <AssociationConnector Association="ACTV.NET_DB.MDFModel.FK_LedgerTable_AgentDetailsTable" />
+        <AssociationConnector Association="ACTV.NET_DB.MDFModel.FK_LedgerTable_AreaDetailsTable" />
+        <AssociationConnector Association="ACTV.NET_DB.MDFModel.FK_MobileInfo_EmployeeTable" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.CompanyTable" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.BillingCategoryTable" Width="1.5" PointX="6" PointY="11.125" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.CustomerDetailsTable" Width="1.5" PointX="8.25" PointY="10.375" />
+        <AssociationConnector Association="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_AgentDetailsTable" />
+        <AssociationConnector Association="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_AreaDetailsTable" />
+        <AssociationConnector Association="ACTV.NET_DB.MDFModel.FK_CustomerDetailsTable_BillingCategoryTable" />
+        <EntityTypeShape EntityType="ACTV.NET_DB.MDFModel.AmountCollectionTable" Width="1.5" PointX="14.25" PointY="3.25" />
+        <AssociationConnector Association="ACTV.NET_DB.MDFModel.FK__AmountCol__Agent__73A521EA" />
+        <AssociationConnector Association="ACTV.NET_DB.MDFModel.FK_AmountCollectionTable_EmployeeTable" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,90 @@
+﻿@model ActvMvcClient.Models.AmountCollectionTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AmountCollectionTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectionAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectionAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BillNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BillNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BillBookNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BillBookNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectionSource)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectionSource)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectionDate2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectionDate2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgentDetailsTable.AgentCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgentDetailsTable.AgentCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeTable.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeTable.EmployeeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerDetailsTable.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerDetailsTable.CustomerName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

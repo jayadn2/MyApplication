@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d164f94aafec431e83c765b4dd0928fe" Name="Diagram1">
+        <EntityTypeShape EntityType="ActvMvcClientModel.AgentDetailsTable" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.AmountCollectionTable" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.AreaDetailsTable" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.BillingCategoryTable" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.BillingFrequncyTable" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.CompanyTable" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.EmployeeTable" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.login_info" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.MobileCollection" Width="2.25" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.MobileInfo" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="ActvMvcClientModel.FK__AmountCol__Agent__73A521EA" ManuallyRouted="false" />
+        <AssociationConnector Association="ActvMvcClientModel.FK_AgentDetailsTable_AgentDetailsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ActvMvcClientModel.FK_AgentDetailsTable_EmployeeTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ActvMvcClientModel.FK_AmountCollectionTable_EmployeeTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ActvMvcClientModel.FK_BillingCategoryTable_BillingFrequncyTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ActvMvcClientModel.FK_MobileInfo_EmployeeTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.CompanyDetail" Width="1.5" PointX="6.5" PointY="13.875" />
+        <AssociationConnector Association="ActvMvcClientModel.FK__CompanyTa__Compa__1975C517" />
+        <EntityTypeShape EntityType="ActvMvcClientModel.CustomerDetailsTable" Width="1.5" PointX="8.25" PointY="4.625" />
+        <AssociationConnector Association="ActvMvcClientModel.FK_CustomerDetailsTable_AgentDetailsTable" />
+        <AssociationConnector Association="ActvMvcClientModel.FK_AmountCollectionTable_CustomerDetailsTable" />
+        <AssociationConnector Association="ActvMvcClientModel.FK_CustomerDetailsTable_AreaDetailsTable" />
+        <AssociationConnector Association="ActvMvcClientModel.FK_CustomerDetailsTable_BillingCategoryTable" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

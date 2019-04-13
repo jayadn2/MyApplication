@@ -1,0 +1,123 @@
+﻿@using PagedList.Mvc;
+
+@model PagedList.IPagedList<ActvMvcClient.Models.AmountCollectionTable>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Mobile Collection";
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<h2>Mobile Collection</h2>
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Delete Duplicate Mobile Entries", "RemoveDuplicateMobileCollectionEntriesIndex", "MobileCollections")</li>
+    </ul>
+</div>
+<br/>
+
+@using (Html.BeginForm("Index", "AmountCollectionTables", FormMethod.Post))
+{
+    <p>
+        <label for="from">From</label>
+        @Html.TextBox("from")
+        <label for="to">To</label>
+        @Html.TextBox("to")
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            BillNum
+        </th>
+        <th>
+            Collection Amount
+        </th>
+        <th>
+            @Html.ActionLink("Collection Date", "Index", new
+       {
+           sortOrder = ViewBag.DateSortParm,
+           currentFilter = ViewBag.CurrentFilter
+       })
+        </th>
+        <th>
+            Agent Code
+        </th>
+        <th>
+            Employee Name
+        </th>
+        <th>
+            @Html.ActionLink("Customer ID", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Customer Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BillNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CollectionAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CollectionDate2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgentDetailsTable.AgentCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeTable.EmployeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerDetailsTable.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerDetailsTable.CustomerName)
+        </td>        
+    </tr>
+}
+
+</table>
+<br/>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index",
+new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<script>
+    $(function () {
+        $("#from").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 2,
+            dateFormat: "dd/mm/yy",
+            onClose: function (selectedDate) {
+                $("#to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#to").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 2,
+            dateFormat: "dd/mm/yy",
+            onClose: function (selectedDate) {
+                $("#from").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+    });
+</script>
+
